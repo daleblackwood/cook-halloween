@@ -102,6 +102,14 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	transform.basis = transform.basis.slerp(Basis.looking_at(-look_dir), Maths.dease(delta, 0.2))
 	
+	for i in range(get_slide_collision_count()):
+		var collision = get_slide_collision(i)
+		#print("collider", collision.get_collider().name)
+		var obj = collision.get_collider()
+		if obj is RigidBody3D:
+			var dir = collision.get_normal(0)
+			obj.apply_impulse(velocity_to + Vector3.UP * 0.5)
+	
 	if global_transform.origin.y < -10.0:
 		global_transform.origin = ground_pos_b
 	

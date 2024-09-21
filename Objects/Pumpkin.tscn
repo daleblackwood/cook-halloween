@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://cmla6tm303nyx"]
+
+[ext_resource type="ArrayMesh" uid="uid://bxv1owjf2hyi7" path="res://Models/Pumpkin.obj" id="1_7q31k"]
+[ext_resource type="Script" path="res://Objects/Pumpkin.gd" id="1_5260p"]
+[ext_resource type="Texture2D" uid="uid://dbq5nhubggsa4" path="res://Models/PumpkinTex.png" id="2_03474"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3wteg"]
+albedo_texture = ExtResource("2_03474")
+metallic_specular = 0.41
+roughness = 0.59
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_1hq2b"]
+height = 0.8
+radius = 0.55
+
+[node name="Pumpkin" type="RigidBody3D"]
+script = ExtResource("1_5260p")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0.395251, 0)
+mesh = ExtResource("1_7q31k")
+surface_material_override/0 = SubResource("StandardMaterial3D_3wteg")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+shape = SubResource("CylinderShape3D_1hq2b")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]
