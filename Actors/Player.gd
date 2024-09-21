@@ -2,10 +2,11 @@ extends CharacterBody3D
 class_name GhostPlayer
 
 @export var speed := 7.5
+@export var dash_speed := 9.5
 @export var jump_power := 15.0
 @export var dash_duration := 0.4
 
-const GRAVITY = 35.0
+const GRAVITY = 40.0
 
 enum MoveState { Ground, Jump, AirCharge, UpDash, AirDash, MAX }
 
@@ -33,6 +34,10 @@ var move_data: Array[MoveAnimData] = []
 var state_time := 0.0
 var dashes_total := 1
 var dashes_remaining := 0
+var ground_pos_a := Vector3.ZERO
+var ground_pos_b := Vector3.ZERO
+var ground_pos_c := Vector3.ZERO
+var ground_pos_time = 0.0
 
 func _ready():
 	spawn_pos = global_transform.origin
@@ -91,12 +96,14 @@ func _physics_process(delta: float) -> void:
 		anim.set("parameters/%s_blend/blend_amount" % data.name, clampf(data.blend, 0.0, 1.0))
 
 	anim.set("parameters/run_blend/blend_amount", clampf(move_speed, 0.0, 1.0))
+	anim.set("parameters/run_fast_blend/blend_amount", 1.0 if want_dash else 0.0)
+	anim.set("parameters/run_speed/scale", clampf(move_speed * 0.3, 0.0, 3.0))
 	
 	move_and_slide()
 	transform.basis = transform.basis.slerp(Basis.looking_at(-look_dir), Maths.dease(delta, 0.2))
 	
 	if global_transform.origin.y < -10.0:
-		global_transform.origin = spawn_pos
+		global_transform.origin = ground_pos_b
 	
 	
 func update_move_state(delta: float) -> MoveState:
@@ -115,10 +122,15 @@ func update_move_state(delta: float) -> MoveState:
 func ground_update(delta: float) -> MoveState:
 	time_in_air = 0.0
 	dashes_remaining = dashes_total
+	
+	if not is_on_wall():
+		ground_pos_time += delta
+		if ground_pos_time > 0.5:
+			ground_pos_b = ground_pos_a
+			ground_pos_a = global_transform.origin
+			ground_pos_time = 0.0
 
-	if want_move:
-		move_velocity = move_dir * speed
-		look_dir = move_dir.normalized()
+	update_forward_movement(delta)
 		
 	if jump_pressed and time_in_air < 0.1:
 		return jump_start()
@@ -130,7 +142,10 @@ func ground_update(delta: float) -> MoveState:
 	
 	
 func jump_start() -> MoveState:
-	velocity.y = jump_power
+	var applied_power = jump_power
+	if want_dash:
+		applied_power *= 1.2
+	velocity.y = applied_power
 	return MoveState.Jump
 	
 	
@@ -138,7 +153,7 @@ func jump_update(delta: float) -> MoveState:
 	if is_on_floor():
 		return MoveState.Ground
 		
-	update_air(delta, GRAVITY, speed)
+	update_air_movement(delta, GRAVITY)
 	if not want_jump and velocity.y > 0.0:
 		velocity.y = 0.0
 		
@@ -174,7 +189,7 @@ func air_dash_start() -> MoveState:
 func air_dash_update(delta: float) -> MoveState:
 	if is_on_floor() or is_on_ceiling():
 		return MoveState.Ground
-	update_air(delta, 0.0, speed * 2.0)
+	update_air_movement(delta, 0.0, speed * 2.0)
 	velocity.y = 0.0
 	if state_time > dash_duration:
 		return MoveState.Jump
@@ -193,7 +208,7 @@ func up_dash_start() -> MoveState:
 func up_dash_update(delta: float) -> MoveState:
 	if is_on_floor() or is_on_ceiling():
 		return MoveState.Ground
-	update_air(delta, GRAVITY * -0.3, 0.0)
+	update_air_movement(delta, GRAVITY * -0.3, 0.0)
 	velocity.y = 10.0
 	if state_time > dash_duration:
 		return MoveState.Jump
@@ -201,13 +216,18 @@ func up_dash_update(delta: float) -> MoveState:
 	return MoveState.UpDash
 	
 	
-func update_air(delta: float, gravity: float, move_speed: float) -> void:
+func update_air_movement(delta: float, gravity: float, move_speed := 0.0) -> void:
 	time_in_air += delta
+	update_forward_movement(delta, move_speed)
+	velocity.y -= max(gravity * delta, -30.0)
+	
+	
+func update_forward_movement(delta: float, move_speed := 0.0) -> void:
 	if want_move:
+		if move_speed == 0.0:
+			move_speed = dash_speed if want_dash else speed
 		move_velocity = move_dir * move_speed
 		look_dir = move_dir.normalized()
-		
-	velocity.y -= gravity * delta
 	
 
 		

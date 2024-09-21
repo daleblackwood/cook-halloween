@@ -1,0 +1,43 @@
+[gd_resource type="Resource" script_class="BlockShaper" load_steps=8 format=3 uid="uid://c5bv7t7p7ojjp"]
+
+[ext_resource type="Script" path="res://addons/goshapes/MeshShaper/Shapers/CapFlatShaper.gd" id="1_g4lts"]
+[ext_resource type="Script" path="res://addons/goshapes/MeshShaper/BlockShaper.gd" id="2_y351b"]
+[ext_resource type="Script" path="res://addons/goshapes/MeshShaper/Shapers/WallBevelShaper.gd" id="3_ohkiy"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_515r5"]
+albedo_color = Color(0.909688, 0.762391, 0.638484, 1)
+
+[sub_resource type="Resource" id="Resource_v2lvo"]
+script = ExtResource("1_g4lts")
+conform_to_wall = false
+material = SubResource("StandardMaterial3D_515r5")
+build_collider = true
+collision_layer = 1
+group_name = ""
+offset_y = 0.0
+enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nca21"]
+albedo_color = Color(0.495601, 0.333294, 0.491484, 1)
+
+[sub_resource type="Resource" id="Resource_j1x86"]
+script = ExtResource("3_ohkiy")
+height = 12.7
+bevel = 0.0
+taper = 0.0
+material = SubResource("StandardMaterial3D_nca21")
+build_collider = true
+collision_layer = 1
+group_name = ""
+offset_y = 0.0
+enabled = true
+
+[resource]
+resource_name = "BlockShape2-BlockShaper"
+script = ExtResource("2_y351b")
+cap_shaper = SubResource("Resource_v2lvo")
+wall_shaper = SubResource("Resource_j1x86")
+bottom_depth = 0.0
+collider_type = 2
+collider_ridge = 0.0
+enabled = true

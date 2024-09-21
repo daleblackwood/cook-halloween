@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://c10qlfh4w5t1y"]
+[gd_scene load_steps=21 format=3 uid="uid://c10qlfh4w5t1y"]
 
 [ext_resource type="Script" path="res://Actors/Player.gd" id="1_i4daa"]
 [ext_resource type="PackedScene" uid="uid://bwhsninbmtm43" path="res://Models/GhostModel.glb" id="1_man51"]
@@ -6,6 +6,11 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tjpw6"]
 radius = 0.35
 height = 1.4
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_87fi3"]
+animation = &"run_fast"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_lghsy"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_m48qh"]
 animation = &"float"
@@ -28,9 +33,9 @@ animation = &"jump"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_r7ow8"]
 animation = &"run"
 
-[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_pnik4"]
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_f8nwf"]
 
-[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_6wmy4"]
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_f3hub"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0ihh3"]
 animation = &"up_dash"
@@ -43,7 +48,11 @@ animation = &"wall_hang"
 [sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_gf63i"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_0ij2g"]
-graph_offset = Vector2(-467.353, -111.931)
+graph_offset = Vector2(-1156.1, 44.3188)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_87fi3")
+nodes/Animation/position = Vector2(-600, 500)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_lghsy")
+nodes/TimeScale/position = Vector2(-375, 275)
 nodes/air_charge_anim/node = SubResource("AnimationNodeAnimation_m48qh")
 nodes/air_charge_anim/position = Vector2(350, 275)
 nodes/air_charge_blend/node = SubResource("AnimationNodeBlend2_3qph2")
@@ -53,18 +62,18 @@ nodes/air_dash/position = Vector2(725, 275)
 nodes/air_dash_blend/node = SubResource("AnimationNodeBlend2_k88po")
 nodes/air_dash_blend/position = Vector2(725, 50)
 nodes/idle_anim/node = SubResource("AnimationNodeAnimation_m3fku")
-nodes/idle_anim/position = Vector2(-375, 75)
+nodes/idle_anim/position = Vector2(-775, 75)
 nodes/jump_anim/node = SubResource("AnimationNodeAnimation_465hf")
 nodes/jump_anim/position = Vector2(175, 300)
 nodes/jump_blend/node = SubResource("AnimationNodeBlend2_6xi7y")
 nodes/jump_blend/position = Vector2(175, 75)
-nodes/output/position = Vector2(1000, 150)
+nodes/output/position = Vector2(1050, 100)
 nodes/run_anim/node = SubResource("AnimationNodeAnimation_r7ow8")
-nodes/run_anim/position = Vector2(-175, 450)
-nodes/run_blend/node = SubResource("AnimationNodeBlend2_pnik4")
+nodes/run_anim/position = Vector2(-725, 350)
+nodes/run_blend/node = SubResource("AnimationNodeBlend2_f8nwf")
 nodes/run_blend/position = Vector2(-175, 75)
-nodes/run_speed/node = SubResource("AnimationNodeTimeScale_6wmy4")
-nodes/run_speed/position = Vector2(-175, 300)
+nodes/run_fast_blend/node = SubResource("AnimationNodeBlend2_f3hub")
+nodes/run_fast_blend/position = Vector2(-550, 275)
 nodes/up_dash/node = SubResource("AnimationNodeAnimation_0ihh3")
 nodes/up_dash/position = Vector2(550, 300)
 nodes/up_dash_blend/node = SubResource("AnimationNodeBlend2_ttb57")
@@ -73,7 +82,7 @@ nodes/wall_hang_anim/node = SubResource("AnimationNodeAnimation_x7kno")
 nodes/wall_hang_anim/position = Vector2(0, 300)
 nodes/wall_hang_blend/node = SubResource("AnimationNodeBlend2_gf63i")
 nodes/wall_hang_blend/position = Vector2(0, 75)
-node_connections = [&"air_charge_blend", 0, &"jump_blend", &"air_charge_blend", 1, &"air_charge_anim", &"air_dash_blend", 0, &"up_dash_blend", &"air_dash_blend", 1, &"air_dash", &"jump_blend", 0, &"wall_hang_blend", &"jump_blend", 1, &"jump_anim", &"output", 0, &"air_dash_blend", &"run_blend", 0, &"idle_anim", &"run_blend", 1, &"run_speed", &"run_speed", 0, &"run_anim", &"up_dash_blend", 0, &"air_charge_blend", &"up_dash_blend", 1, &"up_dash", &"wall_hang_blend", 0, &"run_blend", &"wall_hang_blend", 1, &"wall_hang_anim"]
+node_connections = [&"TimeScale", 0, &"run_fast_blend", &"air_charge_blend", 0, &"jump_blend", &"air_charge_blend", 1, &"air_charge_anim", &"air_dash_blend", 0, &"up_dash_blend", &"air_dash_blend", 1, &"air_dash", &"jump_blend", 0, &"wall_hang_blend", &"jump_blend", 1, &"jump_anim", &"output", 0, &"air_dash_blend", &"run_blend", 0, &"idle_anim", &"run_blend", 1, &"TimeScale", &"run_fast_blend", 0, &"run_anim", &"run_fast_blend", 1, &"Animation", &"up_dash_blend", 0, &"air_charge_blend", &"up_dash_blend", 1, &"up_dash", &"wall_hang_blend", 0, &"run_blend", &"wall_hang_blend", 1, &"wall_hang_anim"]
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_i4daa")
@@ -81,23 +90,25 @@ script = ExtResource("1_i4daa")
 [node name="GhostModel" parent="." instance=ExtResource("1_man51")]
 
 [node name="Skeleton3D" parent="GhostModel/GhostArmature" index="0"]
-bones/0/rotation = Quaternion(-2.98023e-08, 1.19209e-07, 2.11758e-22, 1)
-bones/1/rotation = Quaternion(4.37114e-08, 3.55271e-15, 1, -2.11758e-22)
-bones/2/rotation = Quaternion(3.55271e-15, -3.17865e-08, 4.23517e-22, 1)
-bones/3/rotation = Quaternion(0.617039, -2.8143e-07, -4.60955e-07, 0.786932)
-bones/4/rotation = Quaternion(0.0264687, -1.19168e-07, 3.15532e-09, 0.99965)
-bones/5/rotation = Quaternion(-0.0424677, 7.86729e-15, -9.75441e-16, 0.999098)
-bones/6/rotation = Quaternion(0.00548104, 0.0245987, 0.975754, -0.217416)
+bones/0/position = Vector3(-2.13305e-09, 0.5565, -0.0206214)
+bones/0/rotation = Quaternion(0.167232, 1.17531e-07, 1.99356e-08, 0.985918)
+bones/1/rotation = Quaternion(0.00416096, -0.379671, 0.925077, 0.00804607)
+bones/2/rotation = Quaternion(-0.436269, 0.00285077, -0.00739829, 0.899781)
+bones/3/rotation = Quaternion(0.517325, -0.00398808, -0.000791241, 0.855779)
+bones/4/rotation = Quaternion(0.130995, -1.18182e-07, 1.56158e-08, 0.991383)
+bones/5/rotation = Quaternion(-0.255866, 1.10583e-14, 2.28978e-17, 0.966712)
+bones/6/rotation = Quaternion(0.0643574, 0.280192, 0.934688, -0.209068)
 bones/6/scale = Vector3(1, 1, 1)
-bones/7/rotation = Quaternion(4.28948e-08, 2.40555e-07, -0.171962, 0.985104)
-bones/8/rotation = Quaternion(5.35031e-08, 1.68027e-07, -0.0753088, 0.99716)
-bones/9/rotation = Quaternion(-0.00688749, 0.0234868, 0.975493, 0.218666)
+bones/7/rotation = Quaternion(0.841532, -0.195514, -0.190131, 0.466314)
+bones/8/rotation = Quaternion(4.60737e-08, 1.68588e-07, -0.0753088, 0.99716)
+bones/9/rotation = Quaternion(0.0538821, -0.241932, 0.945591, 0.210768)
 bones/9/scale = Vector3(1, 1, 1)
-bones/10/rotation = Quaternion(-0.000379046, -0.000455652, 0.19015, 0.981755)
+bones/10/rotation = Quaternion(0.80148, 0.217645, 0.0971225, 0.548477)
 bones/10/scale = Vector3(1, 1, 1)
-bones/11/rotation = Quaternion(5.35546e-08, -1.67936e-07, 0.0753088, 0.99716)
-bones/13/rotation = Quaternion(3.55272e-15, 3.17865e-08, -5.04871e-29, 1)
-bones/14/rotation = Quaternion(0.617039, 2.8143e-07, 4.60955e-07, 0.786932)
+bones/11/rotation = Quaternion(5.3205e-08, -1.6408e-07, 0.0753088, 0.99716)
+bones/12/rotation = Quaternion(-4.98198e-05, 0.568262, 0.822847, -0.000106836)
+bones/13/rotation = Quaternion(-0.0280449, 0.000487442, 5.75267e-05, 0.999607)
+bones/14/rotation = Quaternion(0.615158, 7.59323e-05, 1.36669e-05, 0.788404)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
@@ -107,11 +118,12 @@ shape = SubResource("CapsuleShape3D_tjpw6")
 root_node = NodePath("../GhostModel")
 tree_root = SubResource("AnimationNodeBlendTree_0ij2g")
 anim_player = NodePath("../GhostModel/AnimationPlayer")
+parameters/TimeScale/scale = 2.0
 parameters/air_charge_blend/blend_amount = 0.0
 parameters/air_dash_blend/blend_amount = 0.0
 parameters/jump_blend/blend_amount = 0.0
-parameters/run_blend/blend_amount = 0.0
-parameters/run_speed/scale = 2.0
+parameters/run_blend/blend_amount = 1.0
+parameters/run_fast_blend/blend_amount = 0.0
 parameters/up_dash_blend/blend_amount = 0.0
 parameters/wall_hang_blend/blend_amount = 0.0
 
