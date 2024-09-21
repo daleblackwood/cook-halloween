@@ -1,12 +1,13 @@
 extends CharacterBody3D
+class_name GhostPlayer
 
 @export var speed := 7.5
 @export var jump_power := 15.0
-@export var dash_duration := 0.3
+@export var dash_duration := 0.4
 
-const GRAVITY = 40.0
+const GRAVITY = 35.0
 
-enum MoveState { Ground, Jump, AirCharge, AirDash, MAX }
+enum MoveState { Ground, Jump, AirCharge, UpDash, AirDash, MAX }
 
 class MoveAnimData:
 	var name: String
@@ -40,6 +41,7 @@ func _ready():
 	move_data[MoveState.Ground] = MoveAnimData.new("run")
 	move_data[MoveState.Jump] = MoveAnimData.new("jump")
 	move_data[MoveState.AirCharge] = MoveAnimData.new("air_charge")
+	move_data[MoveState.UpDash] = MoveAnimData.new("up_dash")
 	move_data[MoveState.AirDash] = MoveAnimData.new("air_dash")
 	
 
@@ -49,8 +51,7 @@ func _physics_process(delta: float) -> void:
 	jump_pressed = want_jump and not wanted_jump
 	var wanted_dash := want_dash
 	want_dash = Input.is_key_pressed(KEY_SHIFT)
-	dash_pressed = want_dash and not wanted_dash
-	
+	dash_pressed = want_dash and not wanted_dash	
 	input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	
 	var right = Vector3.RIGHT
@@ -80,7 +81,6 @@ func _physics_process(delta: float) -> void:
 	var anim_move := velocity
 	anim_move.y = 0.0
 	var move_speed = anim_move.length()
-	#anim.set("parameters/jump_blend/blend_amount", clampf(time_in_air * 10.0, 0.0, 1.0))
 	
 	for i in range(MoveState.MAX):
 		var data = move_data[i]
@@ -103,6 +103,8 @@ func update_move_state(delta: float) -> MoveState:
 	match move_state:
 		MoveState.AirDash:
 			return air_dash_update(delta)
+		MoveState.UpDash:
+			return up_dash_update(delta)
 		MoveState.AirCharge:
 			return air_charge_update(delta)
 		MoveState.Jump:
@@ -121,6 +123,9 @@ func ground_update(delta: float) -> MoveState:
 	if jump_pressed and time_in_air < 0.1:
 		return jump_start()
 		
+	if not is_on_floor():
+		return MoveState.Jump
+		
 	return MoveState.Ground
 	
 	
@@ -138,20 +143,25 @@ func jump_update(delta: float) -> MoveState:
 		velocity.y = 0.0
 		
 	if jump_pressed and dashes_remaining > 0:
+		if want_dash:
+			return air_dash_start()
 		return air_charge_update(delta)
 		
 	return MoveState.Jump
 	
 	
 func air_charge_update(delta: float) -> MoveState:
-	velocity.y = 0.0
+	velocity.y = -2.0
 	
-	move_velocity = Vector3.ZERO
 	if want_move:
+		move_velocity = move_dir * speed * 0.5
 		look_dir = move_dir.normalized()
 		
 	if not want_jump:
-		return air_dash_start()
+		return jump_update(delta)
+		
+	if dash_pressed and dashes_remaining > 0:
+		return up_dash_start()
 		
 	return MoveState.AirCharge
 	
@@ -162,12 +172,33 @@ func air_dash_start() -> MoveState:
 		
 	
 func air_dash_update(delta: float) -> MoveState:
-	if is_on_floor() or is_on_wall() or is_on_ceiling():
+	if is_on_floor() or is_on_ceiling():
 		return MoveState.Ground
-	update_air(delta, GRAVITY * -0.3, speed * 2.0)
+	update_air(delta, 0.0, speed * 2.0)
+	velocity.y = 0.0
 	if state_time > dash_duration:
 		return MoveState.Jump
+		
+	if jump_pressed:
+		return up_dash_update(delta)
+		
 	return MoveState.AirDash
+	
+	
+func up_dash_start() -> MoveState:
+	dashes_remaining -= 1
+	return MoveState.UpDash
+		
+	
+func up_dash_update(delta: float) -> MoveState:
+	if is_on_floor() or is_on_ceiling():
+		return MoveState.Ground
+	update_air(delta, GRAVITY * -0.3, 0.0)
+	velocity.y = 10.0
+	if state_time > dash_duration:
+		return MoveState.Jump
+		
+	return MoveState.UpDash
 	
 	
 func update_air(delta: float, gravity: float, move_speed: float) -> void:
