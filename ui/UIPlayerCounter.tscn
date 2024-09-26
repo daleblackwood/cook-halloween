@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3 uid="uid://i5oh1eukt2no"]
+
+[ext_resource type="Script" path="res://ui/UIPlayerCounter.gd" id="1_6kf75"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hchdh"]
+bg_color = Color(0.131914, 0.131914, 0.131913, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jv83u"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.850858, 0.474098, 0.489366, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_j4nl5"]
+content_margin_top = 24.0
+
+[node name="UIPlayerCounter" type="PanelContainer"]
+offset_left = 16.0
+offset_top = 17.0
+offset_right = 190.0
+offset_bottom = 99.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_hchdh")
+script = ExtResource("1_6kf75")
+
+[node name="TitleBox" type="PanelContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_jv83u")
+
+[node name="Label" type="Label" parent="TitleBox"]
+layout_mode = 2
+text = "Player 1"
+
+[node name="Candy" type="Label" parent="."]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxEmpty_j4nl5")
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1

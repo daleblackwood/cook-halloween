@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://cw06ilkddqmvf"]
+
+[ext_resource type="ArrayMesh" uid="uid://d2up7gy3xa3ci" path="res://Objects/PumpkinFrag.obj" id="1_r6cda"]
+[ext_resource type="Texture2D" uid="uid://dbq5nhubggsa4" path="res://Models/PumpkinTex.png" id="2_lsf53"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hx6ux"]
+radius = 0.35
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vwgpc"]
+albedo_texture = ExtResource("2_lsf53")
+
+[node name="PumpkinFrag" type="RigidBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_hx6ux")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = ExtResource("1_r6cda")
+skeleton = NodePath("../CollisionShape3D")
+surface_material_override/0 = SubResource("StandardMaterial3D_vwgpc")

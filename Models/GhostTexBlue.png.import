@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bksxlunlbn3o3"
-path.s3tc="res://.godot/imported/CandyTex.png-f570e83e31ab51bcd089e154a4d61a7d.s3tc.ctex"
+uid="uid://ceavmmyp2eb4o"
+path.s3tc="res://.godot/imported/GhostTexBlue.png-bb2e9c35dea19d8f9dac4e042eae75aa.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Models/CandyTex.png"
-dest_files=["res://.godot/imported/CandyTex.png-f570e83e31ab51bcd089e154a4d61a7d.s3tc.ctex"]
+source_file="res://Models/GhostTexBlue.png"
+dest_files=["res://.godot/imported/GhostTexBlue.png-bb2e9c35dea19d8f9dac4e042eae75aa.s3tc.ctex"]
 
 [params]
 

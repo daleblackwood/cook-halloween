@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://1uk7re2x22pf"]
+
+[ext_resource type="Script" path="res://Objects/Pickup.gd" id="1_gput8"]
+[ext_resource type="ArrayMesh" uid="uid://btan55fbcubf4" path="res://Objects/Candy.obj" id="1_sfw3w"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_4mskq"]
+height = 0.6
+radius = 0.2
+
+[node name="Candy" type="RigidBody3D"]
+script = ExtResource("1_gput8")
+item_key = "candy"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_sfw3w")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("CylinderShape3D_4mskq")

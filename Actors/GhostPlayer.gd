@@ -1,6 +1,7 @@
 extends CharacterBody3D
 class_name GhostPlayer
 
+@export var index := 0
 @export var speed := 7.5
 @export var dash_speed := 9.5
 @export var jump_power := 15.0
@@ -51,13 +52,14 @@ func _ready():
 	
 
 func _physics_process(delta: float) -> void:
+	var input := CookInput.get_input(index)
 	var wanted_jump := want_jump
-	want_jump = Input.is_action_pressed("ui_accept")
+	want_jump = input.primary
 	jump_pressed = want_jump and not wanted_jump
 	var wanted_dash := want_dash
-	want_dash = Input.is_key_pressed(KEY_SHIFT)
+	want_dash = input.trigger
 	dash_pressed = want_dash and not wanted_dash	
-	input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	input_dir = input.move
 	
 	var right = Vector3.RIGHT
 	var forward = Vector3.FORWARD
@@ -104,11 +106,14 @@ func _physics_process(delta: float) -> void:
 	
 	for i in range(get_slide_collision_count()):
 		var collision = get_slide_collision(i)
-		#print("collider", collision.get_collider().name)
-		var obj = collision.get_collider()
-		if obj is RigidBody3D:
-			var dir = collision.get_normal(0)
-			obj.apply_impulse(velocity_to + Vector3.UP * 0.5)
+		var body = collision.get_collider()
+		var dir = collision.get_normal(0)
+		if is_instance_of(body, Pickup):
+			(body as Pickup).pickup(self)
+		elif is_instance_of(body, Knockable):
+			(body as Knockable).knock(velocity_to)
+		if body is RigidBody3D:
+			body.apply_impulse(velocity_to + Vector3.UP * 0.5)
 	
 	if global_transform.origin.y < -10.0:
 		global_transform.origin = ground_pos_b
