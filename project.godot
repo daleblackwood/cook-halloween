@@ -28,8 +28,8 @@ GhostGame="*res://game/GhostGame.tscn"
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
-window/stretch/mode="viewport"
-window/stretch/aspect="keep_height"
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
 
 [editor_plugins]
 
@@ -38,3 +38,7 @@ enabled=PackedStringArray("res://addons/cookpot/plugin.cfg", "res://addons/gosha
 [physics]
 
 3d/default_gravity=40.0
+
+[rendering]
+
+anti_aliasing/quality/screen_space_aa=1

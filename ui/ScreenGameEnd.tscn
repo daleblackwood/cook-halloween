@@ -1,9 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://nwd5dpyl6w2q"]
+[gd_scene load_steps=23 format=4 uid="uid://nwd5dpyl6w2q"]
 
 [ext_resource type="Theme" uid="uid://o0xb575gd85j" path="res://ui/UITheme.tres" id="1_mlkyn"]
 [ext_resource type="Script" path="res://ui/UIPlayerCounters.gd" id="2_v8y6t"]
 [ext_resource type="PackedScene" uid="uid://i5oh1eukt2no" path="res://ui/UIPlayerCounter.tscn" id="3_k0crv"]
 [ext_resource type="Script" path="res://addons/cookpot/CookUIInputGroup.gd" id="4_p64xe"]
+[ext_resource type="Script" path="res://addons/goshapes/base/GoCurve3D.gd" id="5_jwdrj"]
+[ext_resource type="Script" path="res://addons/goshapes/Goshape.gd" id="6_ngsjq"]
+[ext_resource type="Script" path="res://addons/goshapes/base/PathOptions.gd" id="7_3treu"]
+[ext_resource type="Resource" uid="uid://dmigsccm6eewu" path="res://Shapes/BlockYellow.tres" id="8_gg3de"]
+[ext_resource type="Material" uid="uid://b2pnaoaw4blgc" path="res://Objects/GrassMat.tres" id="9_fd85q"]
 
 [sub_resource type="GDScript" id="GDScript_5jp3p"]
 script/source = "extends Control
@@ -33,6 +38,103 @@ func _ready() -> void:
 func _on_button_pressed() -> void:
 	GhostGame.to_title()
 "
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_s06wk"]
+sky_top_color = Color(0.519296, 0.394659, 0.562176, 1)
+sky_horizon_color = Color(0.759457, 0.603997, 0.677893, 1)
+ground_bottom_color = Color(0.248634, 0.134231, 0.175892, 1)
+ground_horizon_color = Color(0.760784, 0.603922, 0.678431, 1)
+
+[sub_resource type="Sky" id="Sky_5kukw"]
+sky_material = SubResource("ProceduralSkyMaterial_s06wk")
+
+[sub_resource type="Environment" id="Environment_iqnha"]
+background_mode = 2
+sky = SubResource("Sky_5kukw")
+fog_enabled = true
+fog_light_color = Color(0.247059, 0.133333, 0.176471, 1)
+fog_density = 0.005
+fog_sky_affect = 0.0
+fog_height_density = 0.3616
+
+[sub_resource type="Curve3D" id="Curve3D_jq85r"]
+resource_name = "BlockShape3-GoCurve3D"
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -11.3601, 0, 9.14776, 0, 0, 0, 0, 0, 0, 12.9197, 0, 9.14776, 0, 0, 0, 0, 0, 0, 12.9197, 0, -8.9911, 0, 0, 0, 0, 0, 0, -11.3601, 0, -8.9911),
+"tilts": PackedFloat32Array(0, 0, 0, 0)
+}
+point_count = 4
+script = ExtResource("5_jwdrj")
+
+[sub_resource type="Resource" id="Resource_vlo44"]
+resource_name = "BlockShape3-PathOptions"
+script = ExtResource("7_3treu")
+flatten = true
+twist = false
+line = 0.0
+rounding = 0.0
+rounding_mode = 0
+interpolate = 1
+points_on_ground = false
+offset_y = 0.0
+ground_placement_mask = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_thcfb"]
+albedo_color = Color(0.892928, 0.788308, 0.436576, 1)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_y2i2v"]
+resource_name = "BlockShape3Cap0"
+_surfaces = [{
+"aabb": AABB(-11.3601, 0, -8.9911, 24.2798, 1e-05, 18.1389),
+"attribute_data": PackedByteArray("+MI1wTpdEkEXt05BOl0SQRe3TkGM2w/B+MI1wYzbD8E="),
+"format": 34359742487,
+"index_count": 6,
+"index_data": PackedByteArray("AAADAAIAAgABAAAA"),
+"material": SubResource("StandardMaterial3D_thcfb"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("+MI1wQAAAAA6XRJBF7dOQQAAAAA6XRJBF7dOQQAAAACM2w/B+MI1wQAAAACM2w/B/3///wAA/7//f///AAD/v/9///8AAP+//3///wAA/78=")
+}]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hj5nw"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_5wcyd"]
+resource_name = "BlockShape3Wall0"
+_surfaces = [{
+"aabb": AABB(-11.3601, -12.7, -8.9911, 24.2798, 12.7, 18.1389),
+"attribute_data": PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAG7RQkEAAAAAAAAAADMzS0Fu0UJBMzNLQW7RQkEAAAAAVy6qQQAAAABu0UJBMzNLQVcuqkEzM0tBVy6qQQAAAACHywVCAAAAAFcuqkEzM0tBh8sFQjMzS0GHywVCAAAAAAAAAAAAAAAAh8sFQjMzS0EAAAAAMzNLQQ=="),
+"format": 34359742487,
+"index_count": 48,
+"index_data": PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAARABMAEgAQABMAFAAVABcAFgAUABcAGAAZABsAGgAYABsAHAAdAB8AHgAcAB8A"),
+"material": SubResource("StandardMaterial3D_hj5nw"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 32,
+"vertex_data": PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA+MI1wQAAAAA6XRJBF7dOQQAAAAA6XRJB+MI1wTMzS8E6XRJBF7dOQTMzS8E6XRJBF7dOQQAAAAA6XRJBF7dOQQAAAACM2w/BF7dOQTMzS8E6XRJBF7dOQTMzS8GM2w/BF7dOQQAAAACM2w/B+MI1wQAAAACM2w/BF7dOQTMzS8GM2w/B+MI1wTMzS8GM2w/B+MI1wQAAAACM2w/B+MI1wQAAAAA6XRJB+MI1wTMzS8GM2w/B+MI1wTMzS8E6XRJB/3///wAA/7//f///AAD/v/9///8AAP+//3///wAA/7//f///AAD/v/9///8AAP+//3///wAA/7//f///AAD/v/9///8AAP+//3///wAA/7//f///AAD/v/9///8AAP+//3///wAA/7//f///AAD/v/9///8AAP+//3///wAA/7//P/9/qqqpqv+//39UVamqVFX/f5GkbZuqqv9/bVttm/+//39UVamq////v6qqqapU1f9/bVvatv//qaqRpNq2////v6qqqaoAAP+/VFWpqv//VNWRpG2bAABU1W1bbZsAAP+/VFWpqv8//3+qqqmqAACpqm1b2raqKv9/kaTatg==")
+}]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_plsmw"]
+resource_name = "BlockShape3Wall0"
+_surfaces = [{
+"aabb": AABB(-11.3601, 0, -8.9911, 24.2798, 0.8, 18.1389),
+"attribute_data": PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAG7RQkEAAAAAAAAAAM3MTD9u0UJBzcxMP27RQkEAAAAAVy6qQQAAAABu0UJBzcxMP1cuqkHNzEw/Vy6qQQAAAACHywVCAAAAAFcuqkHNzEw/h8sFQs3MTD+HywVCAAAAAAAAAAAAAAAAh8sFQs3MTD8AAAAAzcxMPw=="),
+"format": 34359742487,
+"index_count": 48,
+"index_data": PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAARABMAEgAQABMAFAAVABcAFgAUABcAGAAZABsAGgAYABsAHAAdAB8AHgAcAB8A"),
+"material": ExtResource("9_fd85q"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 32,
+"vertex_data": PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA+MI1wc3MTD86XRJBF7dOQc3MTD86XRJB+MI1wQAAAAA6XRJBF7dOQQAAAAA6XRJBF7dOQc3MTD86XRJBF7dOQc3MTD+M2w/BF7dOQQAAAAA6XRJBF7dOQQAAAACM2w/BF7dOQc3MTD+M2w/B+MI1wc3MTD+M2w/BF7dOQQAAAACM2w/B+MI1wQAAAACM2w/B+MI1wc3MTD+M2w/B+MI1wc3MTD86XRJB+MI1wQAAAACM2w/B+MI1wQAAAAA6XRJB/3///wAA/7//f///AAD/v/9///8AAP+//3///wAA/7//f///AAD/v/9///8AAP+//3///wAA/7//f///AAD/v/9///8AAP+//3///wAA/7//f///AAD/v/9///8AAP+//3///wAA/7//f///AAD/v/9///8AAP+//3///wAA/7//P/9/qqqpqv+//39UVamqVFX/f5GkbZuqqv9/bVttm/+//39UVamq////v6qqqapU1f9/bVvatv//qaqRpNq2////v6qqqaoAAP+/VFWpqv//VNWRpG2bAABU1W1bbZsAAP+/VFWpqv8//3+qqqmqAACpqm1b2raqKv9/kaTatg==")
+}]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_gww6k"]
+data = PackedVector3Array(-11.3601, 0, 9.1478, -11.3601, 0, -8.9911, 12.9197, 0, -8.9911, 12.9197, 0, -8.9911, 12.9197, 0, 9.1478, -11.3601, 0, 9.1478)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_3wrk6"]
+data = PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -11.3601, 0, 9.1478, 12.9197, 0, 9.1478, 12.9197, -12.7, 9.1478, -11.3601, -12.7, 9.1478, -11.3601, 0, 9.1478, 12.9197, -12.7, 9.1478, 12.9197, 0, 9.1478, 12.9197, 0, -8.9911, 12.9197, -12.7, -8.9911, 12.9197, -12.7, 9.1478, 12.9197, 0, 9.1478, 12.9197, -12.7, -8.9911, 12.9197, 0, -8.9911, -11.3601, 0, -8.9911, -11.3601, -12.7, -8.9911, 12.9197, -12.7, -8.9911, 12.9197, 0, -8.9911, -11.3601, -12.7, -8.9911, -11.3601, 0, -8.9911, -11.3601, 0, 9.1478, -11.3601, -12.7, 9.1478, -11.3601, -12.7, -8.9911, -11.3601, 0, -8.9911, -11.3601, -12.7, 9.1478)
 
 [node name="ScreenGameEnd" type="Control"]
 layout_mode = 3
@@ -116,5 +218,47 @@ script = ExtResource("4_p64xe")
 layout_mode = 2
 size_flags_vertical = 8
 text = "Game Complete"
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="Env" type="Node3D" parent="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Node3D/Env"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 5.11472, 0)
+light_energy = 0.5
+shadow_enabled = true
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="Node3D/Env"]
+transform = Transform3D(0.847033, 0.241301, -0.473613, 0.160446, 0.733389, 0.660604, 0.506747, -0.635542, 0.582489, 0, 5.11472, 0)
+light_energy = 0.5
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Node3D/Env"]
+environment = SubResource("Environment_iqnha")
+
+[node name="BlockShape3" type="Path3D" parent="Node3D"]
+curve = SubResource("Curve3D_jq85r")
+script = ExtResource("6_ngsjq")
+path_options = SubResource("Resource_vlo44")
+shaper = ExtResource("8_gg3de")
+metadata/_edit_group_ = true
+
+[node name="BlockShape3Cap0Mesh" type="MeshInstance3D" parent="Node3D/BlockShape3"]
+mesh = SubResource("ArrayMesh_y2i2v")
+
+[node name="BlockShape3Wall0Mesh" type="MeshInstance3D" parent="Node3D/BlockShape3"]
+mesh = SubResource("ArrayMesh_5wcyd")
+
+[node name="_MeshInstance3D_115889" type="MeshInstance3D" parent="Node3D/BlockShape3"]
+mesh = SubResource("ArrayMesh_plsmw")
+
+[node name="BlockShape3Cap0Body" type="StaticBody3D" parent="Node3D/BlockShape3"]
+
+[node name="BlockShape3Cap0Collider" type="CollisionShape3D" parent="Node3D/BlockShape3/BlockShape3Cap0Body"]
+shape = SubResource("ConcavePolygonShape3D_gww6k")
+
+[node name="BlockShape3Wall0Body" type="StaticBody3D" parent="Node3D/BlockShape3"]
+
+[node name="BlockShape3Wall0Collider" type="CollisionShape3D" parent="Node3D/BlockShape3/BlockShape3Wall0Body"]
+shape = SubResource("ConcavePolygonShape3D_3wrk6")
 
 [connection signal="pressed" from="Buttons/Button" to="." method="_on_button_pressed"]
