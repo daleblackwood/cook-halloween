@@ -10,8 +10,9 @@ data = PackedVector3Array(0, 1.2382, -1.1894, 0, 0.6191, -1.2066, 0.5947, 1.2382
 height = 1.575
 radius = 1.825
 
-[node name="Goal" type="Node3D"]
+[node name="Goal" type="Node3D" node_paths=PackedStringArray("goo")]
 script = ExtResource("1_s14d6")
+goo = NodePath("Cauldron2/CauldronGoo")
 
 [node name="Cauldron2" parent="." instance=ExtResource("2_unjlr")]
 transform = Transform3D(2.5, 0, 0, 0, 2, 0, 0, 0, 2.5, 0, 0, 0)
@@ -31,3 +32,5 @@ shape = SubResource("CylinderShape3D_sj3ae")
 
 [connection signal="body_entered" from="CauldronArea" to="." method="_on_cauldron_area_entered"]
 [connection signal="body_exited" from="CauldronArea" to="." method="_on_cauldron_area_exited"]
+
+[editable path="Cauldron2"]

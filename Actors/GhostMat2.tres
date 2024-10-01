@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bdoqlgdckhil1"]
+
+[ext_resource type="Texture2D" uid="uid://ceavmmyp2eb4o" path="res://Models/GhostTexBlue.png" id="1_roaxj"]
+
+[resource]
+albedo_texture = ExtResource("1_roaxj")
+metallic_specular = 0.9
+roughness = 0.05

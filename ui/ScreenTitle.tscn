@@ -1,0 +1,75 @@
+[gd_scene load_steps=4 format=3 uid="uid://c8qnmj5ilihkv"]
+
+[ext_resource type="Theme" uid="uid://o0xb575gd85j" path="res://ui/UITheme.tres" id="1_rnfa7"]
+[ext_resource type="Script" path="res://addons/cookpot/CookUIInputGroup.gd" id="2_yfoib"]
+
+[sub_resource type="GDScript" id="GDScript_a84dh"]
+script/source = "extends Control
+
+func _ready() -> void:
+	GhostGame.set_scene(self)
+
+func _on_1player_pressed() -> void:
+	GhostGame.start(1)
+
+func _on_2players_pressed() -> void:
+	GhostGame.start(2)	
+"
+
+[node name="TitleScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_rnfa7")
+script = SubResource("GDScript_a84dh")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -291.0
+offset_top = -125.0
+offset_right = 291.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 10
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 100
+text = "JELLOWEEN"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -205.5
+offset_top = 48.0
+offset_right = 205.5
+offset_bottom = 105.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+script = ExtResource("2_yfoib")
+
+[node name="1Player" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+text = "1 PLAYER"
+
+[node name="2Players" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+text = "2 PLAYERS"
+
+[connection signal="pressed" from="HBoxContainer/1Player" to="." method="_on_1player_pressed"]
+[connection signal="pressed" from="HBoxContainer/2Players" to="." method="_on_2players_pressed"]

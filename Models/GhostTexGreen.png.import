@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c0dlrwgs1ykfl"
-path.s3tc="res://.godot/imported/GhostTex.png-36887d7c693c82bf5b828c277e3cd452.s3tc.ctex"
+uid="uid://d4j3qeuvr2nc6"
+path.s3tc="res://.godot/imported/GhostTexGreen.png-8f2465ea5b5d7e050e070042ac63cd3c.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Models/GhostTex.png"
-dest_files=["res://.godot/imported/GhostTex.png-36887d7c693c82bf5b828c277e3cd452.s3tc.ctex"]
+source_file="res://Models/GhostTexGreen.png"
+dest_files=["res://.godot/imported/GhostTexGreen.png-8f2465ea5b5d7e050e070042ac63cd3c.s3tc.ctex"]
 
 [params]
 

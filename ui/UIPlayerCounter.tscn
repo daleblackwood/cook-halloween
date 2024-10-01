@@ -1,45 +1,67 @@
-[gd_scene load_steps=5 format=3 uid="uid://i5oh1eukt2no"]
+[gd_scene load_steps=4 format=3 uid="uid://i5oh1eukt2no"]
 
 [ext_resource type="Script" path="res://ui/UIPlayerCounter.gd" id="1_6kf75"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hchdh"]
-bg_color = Color(0.131914, 0.131914, 0.131913, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jv83u"]
-content_margin_left = 5.0
-content_margin_top = 5.0
-content_margin_right = 5.0
-content_margin_bottom = 5.0
-bg_color = Color(0.850858, 0.474098, 0.489366, 1)
+[ext_resource type="Theme" uid="uid://o0xb575gd85j" path="res://ui/UITheme.tres" id="1_65kkj"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_j4nl5"]
 content_margin_top = 24.0
 
-[node name="UIPlayerCounter" type="PanelContainer"]
-offset_left = 16.0
-offset_top = 17.0
-offset_right = 190.0
-offset_bottom = 99.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_hchdh")
+[node name="UIPlayerCounter" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 84.0
+offset_bottom = 73.0
+size_flags_vertical = 0
+theme = ExtResource("1_65kkj")
 script = ExtResource("1_6kf75")
 
-[node name="TitleBox" type="PanelContainer" parent="."]
-layout_mode = 2
-size_flags_vertical = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_jv83u")
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = -2.0
+offset_right = 1.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 0.0174533
 
-[node name="Label" type="Label" parent="TitleBox"]
+[node name="Colorbar" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
-text = "Player 1"
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 82.0
+offset_bottom = 30.0
+rotation = -0.0349066
+size_flags_vertical = 0
+color = Color(0.452104, 0.415808, 0.318531, 1)
 
 [node name="Candy" type="Label" parent="."]
 layout_mode = 2
+offset_right = 77.0
+offset_bottom = 73.0
 theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxEmpty_j4nl5")
 text = "0"
-horizontal_alignment = 1
+horizontal_alignment = 2
 vertical_alignment = 1
+
+[node name="Label" type="Label" parent="."]
+clip_contents = true
+custom_minimum_size = Vector2(0, -1.125)
+layout_mode = 2
+offset_left = -1.0
+offset_right = 83.0
+offset_bottom = 25.0
+size_flags_vertical = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 20
+text = " P1"
+horizontal_alignment = 1

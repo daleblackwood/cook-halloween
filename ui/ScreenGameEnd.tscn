@@ -1,0 +1,120 @@
+[gd_scene load_steps=6 format=3 uid="uid://nwd5dpyl6w2q"]
+
+[ext_resource type="Theme" uid="uid://o0xb575gd85j" path="res://ui/UITheme.tres" id="1_mlkyn"]
+[ext_resource type="Script" path="res://ui/UIPlayerCounters.gd" id="2_v8y6t"]
+[ext_resource type="PackedScene" uid="uid://i5oh1eukt2no" path="res://ui/UIPlayerCounter.tscn" id="3_k0crv"]
+[ext_resource type="Script" path="res://addons/cookpot/CookUIInputGroup.gd" id="4_p64xe"]
+
+[sub_resource type="GDScript" id="GDScript_5jp3p"]
+script/source = "extends Control
+
+var label_level: Label
+
+func _ready() -> void:
+	label_level = get_node(\"LabelLevel\")
+	var winner := 0
+	var highest := -1
+	var draw := false
+	for i in range(GhostGame.player_count):
+		var score := CookSave.get_count(\"candy\", i)
+		if score == highest:
+			draw = true
+			break
+		if score < highest:
+			continue
+		winner = i
+		highest = score
+	if draw:
+		label_level.text = \"IT'S A DRAW!\"
+	else:
+		label_level.text = \"PLAYER %d WINS!\" % (winner + 1)
+
+
+func _on_button_pressed() -> void:
+	GhostGame.to_title()
+"
+
+[node name="ScreenGameEnd" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_mlkyn")
+script = SubResource("GDScript_5jp3p")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LabelLevel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -152.5
+offset_top = 61.0
+offset_right = 152.5
+offset_bottom = 110.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 72
+text = "X WINS!"
+horizontal_alignment = 1
+
+[node name="PlayerCounters" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = -65.635
+offset_bottom = -65.635
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_v8y6t")
+seperation = 200.0
+centered = true
+
+[node name="UIPlayerCounter" parent="PlayerCounters" instance=ExtResource("3_k0crv")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -86.0
+offset_top = -36.5
+offset_right = -2.0
+offset_bottom = 36.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+
+[node name="Buttons" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -101.5
+offset_top = -104.0
+offset_right = 101.5
+offset_bottom = -47.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 20
+script = ExtResource("4_p64xe")
+
+[node name="Button" type="Button" parent="Buttons"]
+layout_mode = 2
+size_flags_vertical = 8
+text = "Game Complete"
+
+[connection signal="pressed" from="Buttons/Button" to="." method="_on_button_pressed"]

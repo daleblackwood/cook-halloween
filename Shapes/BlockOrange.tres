@@ -11,10 +11,11 @@ albedo_color = Color(0.897117, 0.51432, 0.375301, 1)
 script = ExtResource("1_gepts")
 conform_to_wall = false
 material = SubResource("StandardMaterial3D_g8376")
+path_offset = Vector3(0, 0, 0)
+path_inset = 0.0
 build_collider = true
 collision_layer = 1
 group_name = ""
-offset_y = 0.0
 enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uxsjw"]
@@ -26,10 +27,11 @@ height = 50.0
 bevel = 0.0
 taper = 0.0
 material = SubResource("StandardMaterial3D_uxsjw")
+path_offset = Vector3(0, 0, 0)
+path_inset = 0.0
 build_collider = true
 collision_layer = 1
 group_name = ""
-offset_y = 0.0
 enabled = true
 
 [resource]

@@ -1,6 +1,7 @@
-[gd_scene load_steps=335 format=4 uid="uid://f4yvswj16cix"]
+[gd_scene load_steps=337 format=4 uid="uid://f4yvswj16cix"]
 
 [ext_resource type="Script" path="res://Levels/Stage.gd" id="1_m5ccr"]
+[ext_resource type="PackedScene" uid="uid://de5n4xtuo2rle" path="res://Objects/SpawnPoint.tscn" id="2_6se8o"]
 [ext_resource type="PackedScene" uid="uid://c10qlfh4w5t1y" path="res://Actors/GhostPlayer.tscn" id="2_umxsa"]
 [ext_resource type="Texture2D" uid="uid://ceavmmyp2eb4o" path="res://Models/GhostTexBlue.png" id="3_cntmg"]
 [ext_resource type="Script" path="res://Levels/PlayerCam.gd" id="4_0sf7d"]
@@ -19,6 +20,7 @@
 [ext_resource type="ArrayMesh" uid="uid://bxv1owjf2hyi7" path="res://Models/Pumpkin.obj" id="17_wyfiw"]
 [ext_resource type="Texture2D" uid="uid://dbq5nhubggsa4" path="res://Models/PumpkinTex.png" id="18_c1qis"]
 [ext_resource type="PackedScene" uid="uid://br7rypx76entv" path="res://Levels/Env.tscn" id="19_r173v"]
+[ext_resource type="Theme" uid="uid://o0xb575gd85j" path="res://ui/UITheme.tres" id="20_n3weo"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w3guw"]
 albedo_texture = ExtResource("3_cntmg")
@@ -238,10 +240,11 @@ albedo_color = Color(0.875674, 0.792217, 0.489812, 1)
 script = ExtResource("9_86qo7")
 conform_to_wall = false
 material = SubResource("StandardMaterial3D_fgevf")
+path_offset = Vector3(0, 0, 0)
+path_inset = 0.0
 build_collider = true
 collision_layer = 1
 group_name = ""
-offset_y = 0.0
 enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t7hkw"]
@@ -253,10 +256,11 @@ height = 12.7
 bevel = 0.0
 taper = 0.0
 material = SubResource("StandardMaterial3D_t7hkw")
+path_offset = Vector3(0, 0, 0)
+path_inset = 0.0
 build_collider = true
 collision_layer = 1
 group_name = ""
-offset_y = 0.0
 enabled = true
 
 [sub_resource type="Resource" id="Resource_7hksk"]
@@ -2728,10 +2732,11 @@ albedo_color = Color(0.875674, 0.792217, 0.489812, 1)
 script = ExtResource("9_86qo7")
 conform_to_wall = false
 material = SubResource("StandardMaterial3D_hnoi4")
+path_offset = Vector3(0, 0, 0)
+path_inset = 0.0
 build_collider = true
 collision_layer = 1
 group_name = ""
-offset_y = 0.0
 enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_btc76"]
@@ -2743,10 +2748,11 @@ height = 12.7
 bevel = 0.0
 taper = 0.0
 material = SubResource("StandardMaterial3D_btc76")
+path_offset = Vector3(0, 0, 0)
+path_inset = 0.0
 build_collider = true
 collision_layer = 1
 group_name = ""
-offset_y = 0.0
 enabled = true
 
 [sub_resource type="Resource" id="Resource_erae2"]
@@ -2987,28 +2993,40 @@ fog_density = 0.005
 fog_sky_affect = 0.0
 fog_height_density = 0.3616
 
-[node name="TestStage" type="Node3D"]
+[node name="TestStage" type="Node3D" node_paths=PackedStringArray("goal")]
 script = ExtResource("1_m5ccr")
+goal = NodePath("Goal")
+
+[node name="SpawnPoint" parent="." instance=ExtResource("2_6se8o")]
 
 [node name="Player0" parent="." instance=ExtResource("2_umxsa")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7)
+index = null
+speed = null
+dash_speed = null
+jump_power = null
+dash_duration = null
 
 [node name="Player1" parent="." instance=ExtResource("2_umxsa")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.8876, 0, 7)
 index = 1
+speed = null
+dash_speed = null
+jump_power = null
+dash_duration = null
 
 [node name="Skeleton3D" parent="Player1/GhostModel/GhostArmature" index="0"]
-bones/0/position = Vector3(-6.45742e-09, 0.486742, -0.0586713)
-bones/1/rotation = Quaternion(0.000986698, 0.280395, 0.959877, 0.00360657)
-bones/2/rotation = Quaternion(0.0061289, 0.00415428, -0.00300198, 0.999968)
-bones/3/rotation = Quaternion(0.603386, -0.000274992, 0.000114657, 0.79745)
-bones/6/rotation = Quaternion(-0.00941116, -0.0456961, 0.974933, -0.217554)
-bones/7/rotation = Quaternion(0.81832, -0.209703, -0.132587, 0.518457)
-bones/9/rotation = Quaternion(-0.0203711, 0.0858013, 0.972095, 0.21738)
-bones/10/rotation = Quaternion(0.828083, 0.204308, 0.155259, 0.498428)
-bones/12/rotation = Quaternion(-0.0030107, -0.0303405, 0.999519, -0.00565121)
-bones/13/rotation = Quaternion(-0.686597, 0.0049623, 0.00381304, 0.727011)
-bones/14/rotation = Quaternion(0.509493, 0.00432464, 0.00087995, 0.860464)
+bones/0/position = Vector3(6.19502e-09, 0.526301, -0.0370934)
+bones/1/rotation = Quaternion(0.00355131, -0.249505, 0.968337, 0.00759602)
+bones/2/rotation = Quaternion(-0.207673, 0.00432249, -0.00678256, 0.978165)
+bones/3/rotation = Quaternion(0.541585, -0.00272587, -0.000353285, 0.840641)
+bones/6/rotation = Quaternion(0.0510729, 0.22147, 0.950366, -0.212479)
+bones/7/rotation = Quaternion(0.83754, -0.198326, -0.179242, 0.476515)
+bones/9/rotation = Quaternion(0.0405708, -0.183228, 0.958629, 0.214036)
+bones/10/rotation = Quaternion(0.80698, 0.215212, 0.108275, 0.539207)
+bones/12/rotation = Quaternion(-0.000586423, 0.477615, 0.878568, -0.00110035)
+bones/13/rotation = Quaternion(-0.316065, 0.00368429, 0.000589234, 0.94873)
+bones/14/rotation = Quaternion(0.595637, 0.000895515, 0.000182535, 0.803254)
 
 [node name="GhostArms" parent="Player1/GhostModel/GhostArmature/Skeleton3D" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_w3guw")
@@ -4181,9 +4199,6 @@ shape = SubResource("ConcavePolygonShape3D_qfavp")
 
 [node name="BlockShape9Wall0Collider" type="CollisionShape3D" parent="Blocks/BlockShape9/BlockShape9Wall0Body"]
 shape = SubResource("ConcavePolygonShape3D_bi1xq")
-
-[node name="Goal" parent="Blocks" instance=ExtResource("13_sllv3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 110, 10.4989, -260)
 
 [node name="ScatterShape55" type="Path3D" parent="."]
 curve = SubResource("Curve3D_4o2db")
@@ -5476,7 +5491,11 @@ surface_material_override/0 = SubResource("StandardMaterial3D_3wteg")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
 shape = SubResource("CylinderShape3D_1hq2b")
 
+[node name="Goal" parent="." instance=ExtResource("13_sllv3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 110, 10.4989, -260)
+
 [node name="GameUI" parent="." instance=ExtResource("19_r173v")]
+theme = ExtResource("20_n3weo")
 
 [node name="Env" type="Node3D" parent="."]
 
@@ -5491,9 +5510,6 @@ light_energy = 0.5
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Env"]
 environment = SubResource("Environment_j4xxv")
-
-[node name="Goal" parent="." instance=ExtResource("13_sllv3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 6)
 
 [editable path="Player1"]
 [editable path="Player1/GhostModel"]

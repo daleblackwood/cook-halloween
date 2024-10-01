@@ -1,4 +1,4 @@
-extends CharacterBody3D
+extends Actor
 class_name GhostPlayer
 
 @export var index := 0
@@ -6,6 +6,7 @@ class_name GhostPlayer
 @export var dash_speed := 9.5
 @export var jump_power := 15.0
 @export var dash_duration := 0.4
+@export var base_material: Material
 
 const GRAVITY = 40.0
 
@@ -39,6 +40,8 @@ var ground_pos_a := Vector3.ZERO
 var ground_pos_b := Vector3.ZERO
 var ground_pos_c := Vector3.ZERO
 var ground_pos_time = 0.0
+var color := Color(0, 0, 0)
+var material: Material
 
 func _ready():
 	spawn_pos = global_transform.origin
@@ -49,6 +52,19 @@ func _ready():
 	move_data[MoveState.AirCharge] = MoveAnimData.new("air_charge")
 	move_data[MoveState.UpDash] = MoveAnimData.new("up_dash")
 	move_data[MoveState.AirDash] = MoveAnimData.new("air_dash")
+	
+	
+func set_index(index: int) -> void:
+	if index == self.index:
+		return
+	self.index = index
+	var parts := ["GhostArms", "GhostBody", "GhostLegs"]
+	material = GhostGame.player_mats[index]
+	for part in parts:
+		var node := get_node("GhostModel/GhostArmature/Skeleton3D/%s" % part) as MeshInstance3D
+		if not node:
+			continue
+		node.set_surface_override_material(0, material)
 	
 
 func _physics_process(delta: float) -> void:

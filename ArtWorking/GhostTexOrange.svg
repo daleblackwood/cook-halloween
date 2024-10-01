@@ -6,7 +6,10 @@
    version="1.1"
    id="svg8"
    inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
-   sodipodi:docname="GhostTex.svg"
+   sodipodi:docname="GhostTexBlue.svg"
+   inkscape:export-filename="..\Models\GhostTexBlue.png"
+   inkscape:export-xdpi="81.32"
+   inkscape:export-ydpi="81.32"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -23,9 +26,9 @@
      borderopacity="1"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.0330393"
-     inkscape:cx="265.23676"
-     inkscape:cy="416.73147"
+     inkscape:zoom="0.8981931"
+     inkscape:cx="264.97643"
+     inkscape:cy="416.9482"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
@@ -79,21 +82,21 @@
        x="0"
        y="0" />
     <rect
-       style="fill:#711f44;stroke-width:12;stroke-linecap:round;stroke-linejoin:round;paint-order:markers fill stroke;fill-opacity:1"
+       style="fill:#7c4629;stroke-width:12;stroke-linecap:round;stroke-linejoin:round;paint-order:markers fill stroke;fill-opacity:1"
        id="rect2"
        width="128"
        height="256"
        x="384"
        y="0" />
     <rect
-       style="fill:#b84a68;stroke-width:12;stroke-linecap:round;stroke-linejoin:round;paint-order:markers fill stroke;fill-opacity:1"
+       style="fill:#d28030;stroke-width:12;stroke-linecap:round;stroke-linejoin:round;paint-order:markers fill stroke;fill-opacity:1"
        id="rect3"
        width="128"
        height="128"
        x="384"
        y="256" />
     <rect
-       style="fill:#711f44;fill-opacity:1;stroke-width:12;stroke-linecap:round;stroke-linejoin:round;paint-order:markers fill stroke"
+       style="fill:#58442a;fill-opacity:1;stroke-width:12;stroke-linecap:round;stroke-linejoin:round;paint-order:markers fill stroke"
        id="rect4"
        width="128"
        height="128"
@@ -121,7 +124,7 @@
        x="0"
        y="384" />
     <rect
-       style="fill:#b84a68;fill-opacity:1;stroke-width:10.7873;stroke-linecap:round;stroke-linejoin:round;paint-order:markers fill stroke"
+       style="fill:#d28030;fill-opacity:1;stroke-width:10.7873;stroke-linecap:round;stroke-linejoin:round;paint-order:markers fill stroke"
        id="rect8"
        width="384"
        height="34.478909"

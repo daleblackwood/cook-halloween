@@ -1,16 +1,16 @@
 class_name UIPlayerCounter
-extends PanelContainer
+extends Control
 
 @export var player_index := 0
 
-var title_box: PanelContainer
+var color_bar: ColorRect
 var title_label: Label
 var candy_label: Label
+var color: Color
 
-func _ready() -> void:
-	title_box = get_node("TitleBox")
-	title_label = title_box.get_node("Label")
-	title_label.text = "Player %d" % (player_index + 1)
+func _enter_tree() -> void:
+	color_bar = get_node("Colorbar")
+	title_label = get_node("Label")
 	candy_label = get_node("Candy")
 
 
@@ -18,3 +18,10 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	var candy_count = CookSave.get_count("candy", player_index)
 	candy_label.text = str(candy_count)
+	
+	
+func setup(index: int, color: Color) -> void:
+	self.player_index = index
+	self.color = color
+	get_node("Colorbar").color = color
+	title_label.text = " P%d" % (player_index + 1)

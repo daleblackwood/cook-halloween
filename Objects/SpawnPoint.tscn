@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://vexa1ropmsag"]
+
+[sub_resource type="GDScript" id="GDScript_sxjoj"]
+script/source = "extends Node3D
+
+func _enter_tree() -> void:
+	var player_count:int = GhostGame.player_count
+	var origin = Vector3.ZERO;
+	origin.x -= player_count * 0.5
+	var parent = get_parent_node_3d()
+	for i in range(player_count):
+		var player := GhostGame.prefab_player.instantiate() as GhostPlayer
+		parent.add_child(player)
+		player.owner = parent
+		player.set_index(i)
+		if i < GhostGame.players.size():
+			GhostGame.players[i].node = player
+		player.global_transform.origin = origin + global_transform.origin
+		origin.x += 1.0
+"
+
+[node name="SpawnPoint" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7)
+script = SubResource("GDScript_sxjoj")
