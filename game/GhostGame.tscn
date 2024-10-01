@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://c53boco5mekqq"]
+[gd_scene load_steps=12 format=3 uid="uid://c53boco5mekqq"]
 
 [ext_resource type="Script" path="res://game/GhostGame.gd" id="1_6uowk"]
+[ext_resource type="PackedScene" uid="uid://cxydnj1nlccsf" path="res://Levels/Level1.tscn" id="2_2cgox"]
 [ext_resource type="PackedScene" uid="uid://f4yvswj16cix" path="res://Levels/Level2.tscn" id="2_hggvu"]
 [ext_resource type="PackedScene" uid="uid://c10qlfh4w5t1y" path="res://Actors/GhostPlayer.tscn" id="3_twbwk"]
 [ext_resource type="PackedScene" uid="uid://dn5kh8pirt370" path="res://ui/ScreenLevelEnd.tscn" id="4_i0r21"]
@@ -13,8 +14,7 @@
 
 [node name="GhostGame" type="Node"]
 script = ExtResource("1_6uowk")
-player_count = 2
-levels = Array[PackedScene]([ExtResource("2_hggvu")])
+levels = Array[PackedScene]([ExtResource("2_2cgox"), ExtResource("2_hggvu")])
 prefab_player = ExtResource("3_twbwk")
 colors = Array[Color]([Color(0.738217, 0.30238, 0.467944, 1), Color(0.233517, 0.512926, 0.635179, 1), Color(0.690947, 0.382886, 0.20787, 1), Color(0.479528, 0.50205, 0.125897, 1)])
 scene_title = ExtResource("4_m6vkl")

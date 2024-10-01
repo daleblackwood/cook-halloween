@@ -32,7 +32,7 @@ func _process(delta: float) -> void:
 	cam_pos += Vector3.BACK * distance + Vector3.UP * distance * height_multi
 	
 	var move = cam_pos - global_transform.origin
-	move *= 1.0 - Maths.dease(delta, 0.9)
+	move *= 1.0 - CookMath.dease(delta, 0.9)
 	
 	global_transform.origin += move
 	global_transform.basis = Basis.looking_at(target_pos - cam_pos)

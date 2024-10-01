@@ -99,7 +99,7 @@ func _physics_process(delta: float) -> void:
 	
 	var velocity_to = move_velocity
 	velocity_to.y += velocity.y
-	velocity = velocity.lerp(velocity_to,  Maths.dease(delta, 0.3))
+	velocity = velocity.lerp(velocity_to,  CookMath.dease(delta, 0.3))
 	
 	var anim_move := velocity
 	anim_move.y = 0.0
@@ -118,7 +118,7 @@ func _physics_process(delta: float) -> void:
 	anim.set("parameters/run_speed/scale", clampf(move_speed * 0.3, 0.0, 3.0))
 	
 	move_and_slide()
-	transform.basis = transform.basis.slerp(Basis.looking_at(-look_dir), Maths.dease(delta, 0.2))
+	transform.basis = transform.basis.slerp(Basis.looking_at(-look_dir), CookMath.dease(delta, 0.2))
 	
 	for i in range(get_slide_collision_count()):
 		var collision = get_slide_collision(i)
