@@ -14,6 +14,12 @@ func _on_1player_pressed() -> void:
 
 func _on_2players_pressed() -> void:
 	GhostGame.start(2)	
+	
+func _on_3players_pressed() -> void:
+	GhostGame.start(3)	
+
+func _on_4players_pressed() -> void:
+	GhostGame.start(4)	
 "
 
 [node name="TitleScreen" type="Control"]
@@ -71,5 +77,15 @@ text = "1 PLAYER"
 layout_mode = 2
 text = "2 PLAYERS"
 
+[node name="3Players" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+text = "3 PLAYERS"
+
+[node name="4Players" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+text = "4 PLAYERS"
+
 [connection signal="pressed" from="HBoxContainer/1Player" to="." method="_on_1player_pressed"]
 [connection signal="pressed" from="HBoxContainer/2Players" to="." method="_on_2players_pressed"]
+[connection signal="pressed" from="HBoxContainer/3Players" to="." method="_on_3players_pressed"]
+[connection signal="pressed" from="HBoxContainer/4Players" to="." method="_on_4players_pressed"]

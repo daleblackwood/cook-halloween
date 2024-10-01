@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BlockShaper" load_steps=8 format=3 uid="uid://db1qnbunc4q0o"]
+[gd_resource type="Resource" script_class="BlockShaper" load_steps=10 format=3 uid="uid://db1qnbunc4q0o"]
 
 [ext_resource type="Script" path="res://addons/goshapes/MeshShaper/Shapers/CapFlatShaper.gd" id="1_gepts"]
 [ext_resource type="Script" path="res://addons/goshapes/MeshShaper/BlockShaper.gd" id="2_e12vx"]
+[ext_resource type="Material" uid="uid://b2pnaoaw4blgc" path="res://Objects/GrassMat.tres" id="3_6a0ma"]
 [ext_resource type="Script" path="res://addons/goshapes/MeshShaper/Shapers/WallBevelShaper.gd" id="3_6e4e6"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g8376"]
@@ -12,6 +13,19 @@ script = ExtResource("1_gepts")
 conform_to_wall = false
 material = SubResource("StandardMaterial3D_g8376")
 path_offset = Vector3(0, 0, 0)
+path_inset = 0.0
+build_collider = true
+collision_layer = 1
+group_name = ""
+enabled = true
+
+[sub_resource type="Resource" id="Resource_fuy4m"]
+script = ExtResource("3_6e4e6")
+height = 0.7
+bevel = 0.0
+taper = 0.0
+material = ExtResource("3_6a0ma")
+path_offset = Vector3(0, 0.7, 0)
 path_inset = 0.0
 build_collider = true
 collision_layer = 1
@@ -39,6 +53,7 @@ resource_name = "BlockShape2-BlockShaper"
 script = ExtResource("2_e12vx")
 cap_shaper = SubResource("Resource_3k2xx")
 wall_shaper = SubResource("Resource_p14bi")
+skirt_shaper = SubResource("Resource_fuy4m")
 bottom_depth = 0.0
 collider_type = 2
 collider_ridge = 0.0

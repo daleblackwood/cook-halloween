@@ -21,6 +21,7 @@ class MoveAnimData:
 var look_dir = Vector3.FORWARD
 var time_in_air = 0.0
 var time_charging := 0.0
+var time_since_ground := 0.0
 var move_state := MoveState.Ground
 var spawn_pos = Vector3.ZERO
 var anim: AnimationTree
@@ -88,6 +89,11 @@ func _physics_process(delta: float) -> void:
 	want_move = move_dir.length_squared() > 0.2
 	if not want_move:
 		move_dir = Vector3.ZERO
+		
+	if is_on_floor():
+		time_since_ground = 0.0
+	else:
+		time_since_ground += delta
 		
 	move_velocity = Vector3.ZERO
 	var prev_state := move_state
@@ -161,7 +167,7 @@ func ground_update(delta: float) -> MoveState:
 
 	update_forward_movement(delta)
 		
-	if jump_pressed and time_in_air < 0.1:
+	if jump_pressed and time_since_ground < 0.1:
 		return jump_start()
 		
 	if not is_on_floor():
@@ -181,6 +187,9 @@ func jump_start() -> MoveState:
 func jump_update(delta: float) -> MoveState:
 	if is_on_floor():
 		return MoveState.Ground
+	
+	if jump_pressed and time_since_ground < 0.2:
+		return jump_start()
 		
 	update_air_movement(delta, GRAVITY)
 	if not want_jump and velocity.y > 0.0:

@@ -1,16 +1,17 @@
-[gd_resource type="Resource" script_class="BlockShaper" load_steps=8 format=3 uid="uid://dmigsccm6eewu"]
+[gd_resource type="Resource" script_class="BlockShaper" load_steps=10 format=3 uid="uid://dmigsccm6eewu"]
 
 [ext_resource type="Script" path="res://addons/goshapes/MeshShaper/Shapers/CapFlatShaper.gd" id="1_sec6u"]
 [ext_resource type="Script" path="res://addons/goshapes/MeshShaper/BlockShaper.gd" id="2_k5mxj"]
+[ext_resource type="Material" uid="uid://b2pnaoaw4blgc" path="res://Objects/GrassMat.tres" id="3_fvsk5"]
 [ext_resource type="Script" path="res://addons/goshapes/MeshShaper/Shapers/WallBevelShaper.gd" id="3_qh0x2"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qtr2u"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_thcfb"]
 albedo_color = Color(0.892928, 0.788308, 0.436576, 1)
 
 [sub_resource type="Resource" id="Resource_2obm5"]
 script = ExtResource("1_sec6u")
 conform_to_wall = false
-material = SubResource("StandardMaterial3D_qtr2u")
+material = SubResource("StandardMaterial3D_thcfb")
 path_offset = Vector3(0, 0, 0)
 path_inset = 0.0
 build_collider = true
@@ -18,15 +19,28 @@ collision_layer = 1
 group_name = ""
 enabled = true
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2m780"]
-albedo_color = Color(0.495601, 0.333294, 0.491484, 1)
+[sub_resource type="Resource" id="Resource_q7a2e"]
+script = ExtResource("3_qh0x2")
+height = 0.8
+bevel = 0.0
+taper = 0.0
+material = ExtResource("3_fvsk5")
+path_offset = Vector3(0, 0.8, 0)
+path_inset = 0.0
+build_collider = false
+collision_layer = 1
+group_name = ""
+enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hj5nw"]
+albedo_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Resource" id="Resource_j1x86"]
 script = ExtResource("3_qh0x2")
 height = 12.7
 bevel = 0.0
 taper = 0.0
-material = SubResource("StandardMaterial3D_2m780")
+material = SubResource("StandardMaterial3D_hj5nw")
 path_offset = Vector3(0, 0, 0)
 path_inset = 0.0
 build_collider = true
@@ -39,6 +53,7 @@ resource_name = "BlockShape2-BlockShaper"
 script = ExtResource("2_k5mxj")
 cap_shaper = SubResource("Resource_2obm5")
 wall_shaper = SubResource("Resource_j1x86")
+skirt_shaper = SubResource("Resource_q7a2e")
 bottom_depth = 0.0
 collider_type = 2
 collider_ridge = 0.0
