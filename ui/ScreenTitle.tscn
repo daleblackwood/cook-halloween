@@ -13,6 +13,7 @@ script/source = "extends Control
 
 func _ready() -> void:
 	GhostGame.set_scene(self)
+	CookMusic.play(\"GhostTitle\")
 
 func _on_1player_pressed() -> void:
 	GhostGame.start(1)

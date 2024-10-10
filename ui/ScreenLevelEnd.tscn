@@ -19,6 +19,7 @@ var label_level: Label
 func _ready() -> void:
 	label_level = get_node(\"LabelLevel\")
 	label_level.text = \"Level %d Complete\" % (GhostGame.level_index + 1)
+	CookMusic.play(\"GhostTitle\")
 
 
 func _on_button_pressed() -> void:

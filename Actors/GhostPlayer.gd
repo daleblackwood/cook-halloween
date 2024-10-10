@@ -43,6 +43,7 @@ var ground_pos_c := Vector3.ZERO
 var ground_pos_time = 0.0
 var color := Color(0, 0, 0)
 var material: Material
+var distance_to_step_sound := 1.0
 
 func _ready():
 	spawn_pos = global_transform.origin
@@ -85,10 +86,15 @@ func _physics_process(delta: float) -> void:
 		var cam_basis = cam.global_transform.basis
 		right = cam_basis.x
 		forward = right.cross(Vector3.UP)
-	move_dir = (right * input_dir.x + forward * input_dir.y).clampf(-1.0, 1.0)
+	move_dir = (right * input_dir.x + forward * input_dir.y)
 	want_move = move_dir.length_squared() > 0.2
-	if not want_move:
+	if want_move:
+		if move_dir.length_squared() > 1.0:
+			move_dir = move_dir.normalized()
+	else:
 		move_dir = Vector3.ZERO
+		
+		
 		
 	if is_on_floor():
 		time_since_ground = 0.0
@@ -110,6 +116,12 @@ func _physics_process(delta: float) -> void:
 	var anim_move := velocity
 	anim_move.y = 0.0
 	var move_speed = anim_move.length()
+	
+	if is_on_floor():
+		distance_to_step_sound -= move_speed * delta
+		if distance_to_step_sound < 0.0:
+			CookSFX.play("step", global_transform.origin)
+			distance_to_step_sound = 1.3
 	
 	for i in range(MoveState.MAX):
 		var data = move_data[i]
@@ -177,6 +189,7 @@ func ground_update(delta: float) -> MoveState:
 	
 	
 func jump_start() -> MoveState:
+	CookSFX.play("jump", global_transform.origin)
 	var applied_power = jump_power
 	if want_dash:
 		applied_power *= 1.2
@@ -219,7 +232,8 @@ func air_charge_update(delta: float) -> MoveState:
 	return MoveState.AirCharge
 	
 	
-func air_dash_start() -> MoveState:
+func air_dash_start() -> MoveState:	
+	CookSFX.play("dash", global_transform.origin)
 	dashes_remaining -= 1
 	return MoveState.AirDash
 		
@@ -239,6 +253,7 @@ func air_dash_update(delta: float) -> MoveState:
 	
 	
 func up_dash_start() -> MoveState:
+	CookSFX.play("dash", global_transform.origin)
 	dashes_remaining -= 1
 	return MoveState.UpDash
 		

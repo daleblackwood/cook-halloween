@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="CookSFXList" load_steps=25 format=3 uid="uid://bryq2liepqtcy"]
+
+[ext_resource type="AudioStream" uid="uid://cfd7cha6lwu1c" path="res://Audio/SFX/cauldron.wav" id="1_5pvse"]
+[ext_resource type="Script" path="res://addons/cookpot/CookSFXList.gd" id="1_khbfk"]
+[ext_resource type="AudioStream" uid="uid://p3ji3i5rapkc" path="res://Audio/SFX/cauldron2.wav" id="2_tfu6p"]
+[ext_resource type="AudioStream" uid="uid://yryaohgbbuqr" path="res://Audio/SFX/coin1.wav" id="3_46v1v"]
+[ext_resource type="AudioStream" uid="uid://6xicol6ryrw0" path="res://Audio/SFX/coin2.wav" id="4_huplm"]
+[ext_resource type="AudioStream" uid="uid://ds5e486n2ao6r" path="res://Audio/SFX/coin3.wav" id="5_mk5ss"]
+[ext_resource type="AudioStream" uid="uid://cc7icbu0mq4r6" path="res://Audio/SFX/dash1.wav" id="6_6et8m"]
+[ext_resource type="AudioStream" uid="uid://cxqvfckamqd54" path="res://Audio/SFX/dash2.wav" id="7_j8ppq"]
+[ext_resource type="AudioStream" uid="uid://c3qcs8cdv7f51" path="res://Audio/SFX/dash3.wav" id="8_k22si"]
+[ext_resource type="AudioStream" uid="uid://c0yu066bbxsec" path="res://Audio/SFX/jump1.wav" id="9_ptgbl"]
+[ext_resource type="AudioStream" uid="uid://beokihtdt6pky" path="res://Audio/SFX/jump2.wav" id="10_fnihi"]
+[ext_resource type="AudioStream" uid="uid://bunq2vqmqf58p" path="res://Audio/SFX/jump3.wav" id="11_tbr7q"]
+[ext_resource type="AudioStream" uid="uid://bssnktbp08as3" path="res://Audio/SFX/kick1.wav" id="12_u6x4k"]
+[ext_resource type="AudioStream" uid="uid://dyl3kfj5eqnau" path="res://Audio/SFX/kick2.wav" id="13_0slvw"]
+[ext_resource type="AudioStream" uid="uid://c12u5ryq4bbo7" path="res://Audio/SFX/land1.wav" id="14_rknpl"]
+[ext_resource type="AudioStream" uid="uid://h5as6y0b5v8s" path="res://Audio/SFX/land2.wav" id="15_wfnd5"]
+[ext_resource type="AudioStream" uid="uid://dg3h0dy2yalw" path="res://Audio/SFX/land3.wav" id="16_wox8l"]
+[ext_resource type="AudioStream" uid="uid://dfnpd0f18jp5u" path="res://Audio/SFX/smash1.wav" id="17_eaihr"]
+[ext_resource type="AudioStream" uid="uid://xpoamsp7opul" path="res://Audio/SFX/smash2.wav" id="18_km2qa"]
+[ext_resource type="AudioStream" uid="uid://cmkd0aqh7nq6" path="res://Audio/SFX/step1.wav" id="19_6wg44"]
+[ext_resource type="AudioStream" uid="uid://dqcxfjd3b60gc" path="res://Audio/SFX/step2.wav" id="20_qusce"]
+[ext_resource type="AudioStream" uid="uid://tlf0uqxfadtu" path="res://Audio/SFX/step3.wav" id="21_gh8et"]
+[ext_resource type="AudioStream" uid="uid://b5ncd7hm8iqtj" path="res://Audio/SFX/ui-confirm.wav" id="22_v2vaw"]
+[ext_resource type="AudioStream" uid="uid://b8g18f6th3slr" path="res://Audio/SFX/ui-select.wav" id="23_qkft2"]
+
+[resource]
+script = ExtResource("1_khbfk")
+audio_files = Array[AudioStream]([ExtResource("1_5pvse"), ExtResource("2_tfu6p"), ExtResource("3_46v1v"), ExtResource("4_huplm"), ExtResource("5_mk5ss"), ExtResource("6_6et8m"), ExtResource("7_j8ppq"), ExtResource("8_k22si"), ExtResource("9_ptgbl"), ExtResource("10_fnihi"), ExtResource("11_tbr7q"), ExtResource("12_u6x4k"), ExtResource("13_0slvw"), ExtResource("14_rknpl"), ExtResource("15_wfnd5"), ExtResource("16_wox8l"), ExtResource("17_eaihr"), ExtResource("18_km2qa"), ExtResource("19_6wg44"), ExtResource("20_qusce"), ExtResource("21_gh8et"), ExtResource("22_v2vaw"), ExtResource("23_qkft2")])
+import_folder = "res://Audio/SFX/cauldron2.wav"

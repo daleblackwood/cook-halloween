@@ -8,6 +8,7 @@ var speed := 0.0
 
 func pickup(player: GhostPlayer) -> void:
 	CookSave.increase_count(item_key, 1, player.index)
+	CookSFX.play("coin", global_transform.origin)
 	queue_free()
 	
 func _process(delta: float) -> void:

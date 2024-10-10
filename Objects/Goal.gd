@@ -30,7 +30,8 @@ func _process(delta: float) -> void:
 func _on_cauldron_area_entered(body) -> void:
 	if not is_instance_of(body, GhostPlayer):
 		return
-	print("in goal")
+	print("in goal")	
+	CookSFX.play("cauldron", global_transform.origin)
 	gooPower = 1.0
 	goal_countdown = goal_in_time
 

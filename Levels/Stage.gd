@@ -7,6 +7,7 @@ extends Node3D
 @export var spawn_point: Node3D
 
 func _ready() -> void:
+	CookMusic.play("GhostGameplay")
 	if spawn_point:
 		spawn_actors(spawn_point.global_transform.origin)
 	else:

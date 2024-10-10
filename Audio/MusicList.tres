@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="CookMusicList" load_steps=7 format=3 uid="uid://dib7p07oym1p0"]
+
+[ext_resource type="Script" path="res://addons/cookpot/CookMusicEntry.gd" id="1_chufr"]
+[ext_resource type="Script" path="res://addons/cookpot/CookMusicList.gd" id="2_i7hxh"]
+[ext_resource type="AudioStream" uid="uid://dv4rrenyg7myf" path="res://Audio/Music/GhostGameplay.ogg" id="2_o0pcb"]
+[ext_resource type="AudioStream" uid="uid://c4eonxhh1u2pv" path="res://Audio/Music/GhostTitle.ogg" id="3_45pfn"]
+
+[sub_resource type="Resource" id="Resource_dhh0j"]
+script = ExtResource("1_chufr")
+file = ExtResource("2_o0pcb")
+loop_start = 4.0
+loop_end = 50.0
+volume = 1.0
+
+[sub_resource type="Resource" id="Resource_t8l52"]
+script = ExtResource("1_chufr")
+file = ExtResource("3_45pfn")
+loop_start = 4.0
+loop_end = 50.0
+volume = 1.0
+
+[resource]
+script = ExtResource("2_i7hxh")
+master_volume = 0.5
+music = Array[ExtResource("1_chufr")]([SubResource("Resource_dhh0j"), SubResource("Resource_t8l52")])

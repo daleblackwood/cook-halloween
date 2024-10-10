@@ -16,6 +16,7 @@ script/source = "extends Control
 var label_level: Label
 
 func _ready() -> void:
+	CookMusic.play(\"GhostTitle\")
 	label_level = get_node(\"LabelLevel\")
 	var winner := 0
 	var highest := -1

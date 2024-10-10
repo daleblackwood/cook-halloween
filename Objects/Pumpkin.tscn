@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://cmla6tm303nyx"]
 
 [ext_resource type="ArrayMesh" uid="uid://bxv1owjf2hyi7" path="res://Models/Pumpkin.obj" id="1_7q31k"]
-[ext_resource type="Script" path="res://Objects/Pumpkin.gd" id="1_5260p"]
+[ext_resource type="Script" path="res://Objects/Knockable.gd" id="1_5260p"]
 [ext_resource type="Texture2D" uid="uid://dbq5nhubggsa4" path="res://Models/PumpkinTex.png" id="2_03474"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3wteg"]
