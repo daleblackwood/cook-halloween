@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CookSFXList" load_steps=25 format=3 uid="uid://bryq2liepqtcy"]
+[gd_resource type="Resource" script_class="CookSFXList" load_steps=26 format=3 uid="uid://bryq2liepqtcy"]
 
 [ext_resource type="AudioStream" uid="uid://cfd7cha6lwu1c" path="res://Audio/SFX/cauldron.wav" id="1_5pvse"]
 [ext_resource type="Script" path="res://addons/cookpot/CookSFXList.gd" id="1_khbfk"]
@@ -24,8 +24,9 @@
 [ext_resource type="AudioStream" uid="uid://tlf0uqxfadtu" path="res://Audio/SFX/step3.wav" id="21_gh8et"]
 [ext_resource type="AudioStream" uid="uid://b5ncd7hm8iqtj" path="res://Audio/SFX/ui-confirm.wav" id="22_v2vaw"]
 [ext_resource type="AudioStream" uid="uid://b8g18f6th3slr" path="res://Audio/SFX/ui-select.wav" id="23_qkft2"]
+[ext_resource type="AudioStream" uid="uid://bqrhgim8lp7m0" path="res://Audio/SFX/lightning.wav" id="24_f56je"]
 
 [resource]
 script = ExtResource("1_khbfk")
-audio_files = Array[AudioStream]([ExtResource("1_5pvse"), ExtResource("2_tfu6p"), ExtResource("3_46v1v"), ExtResource("4_huplm"), ExtResource("5_mk5ss"), ExtResource("6_6et8m"), ExtResource("7_j8ppq"), ExtResource("8_k22si"), ExtResource("9_ptgbl"), ExtResource("10_fnihi"), ExtResource("11_tbr7q"), ExtResource("12_u6x4k"), ExtResource("13_0slvw"), ExtResource("14_rknpl"), ExtResource("15_wfnd5"), ExtResource("16_wox8l"), ExtResource("17_eaihr"), ExtResource("18_km2qa"), ExtResource("19_6wg44"), ExtResource("20_qusce"), ExtResource("21_gh8et"), ExtResource("22_v2vaw"), ExtResource("23_qkft2")])
+audio_files = Array[AudioStream]([ExtResource("1_5pvse"), ExtResource("2_tfu6p"), ExtResource("3_46v1v"), ExtResource("4_huplm"), ExtResource("5_mk5ss"), ExtResource("6_6et8m"), ExtResource("7_j8ppq"), ExtResource("8_k22si"), ExtResource("9_ptgbl"), ExtResource("10_fnihi"), ExtResource("11_tbr7q"), ExtResource("12_u6x4k"), ExtResource("13_0slvw"), ExtResource("14_rknpl"), ExtResource("15_wfnd5"), ExtResource("16_wox8l"), ExtResource("17_eaihr"), ExtResource("18_km2qa"), ExtResource("19_6wg44"), ExtResource("20_qusce"), ExtResource("21_gh8et"), ExtResource("22_v2vaw"), ExtResource("23_qkft2"), ExtResource("24_f56je")])
 import_folder = "res://Audio/SFX/cauldron2.wav"

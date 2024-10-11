@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c53boco5mekqq"]
+[gd_scene load_steps=15 format=3 uid="uid://c53boco5mekqq"]
 
 [ext_resource type="Script" path="res://game/GhostGame.gd" id="1_6uowk"]
 [ext_resource type="PackedScene" uid="uid://cxydnj1nlccsf" path="res://Levels/Level1.tscn" id="2_2cgox"]
@@ -12,6 +12,8 @@
 [ext_resource type="Material" uid="uid://bdoqlgdckhil1" path="res://Actors/GhostMat2.tres" id="8_kjelk"]
 [ext_resource type="Material" uid="uid://sp6b3f71gonj" path="res://Actors/GhostMat3.tres" id="9_ji8h1"]
 [ext_resource type="Material" uid="uid://d2jdgugs3bwpp" path="res://Actors/GhostMat4.tres" id="10_d5l53"]
+[ext_resource type="PackedScene" uid="uid://o0k588u8ybis" path="res://Actors/PlayerPlayback.tscn" id="13_y4o6s"]
+[ext_resource type="PackedScene" uid="uid://br7rypx76entv" path="res://GameUI.tscn" id="14_q8dnc"]
 
 [node name="GhostGame" type="Node"]
 script = ExtResource("1_6uowk")
@@ -22,3 +24,5 @@ scene_title = ExtResource("4_m6vkl")
 scene_end_level = ExtResource("4_i0r21")
 scene_end_game = ExtResource("6_jwpyv")
 player_mats = Array[Material]([ExtResource("7_jhxx4"), ExtResource("8_kjelk"), ExtResource("9_ji8h1"), ExtResource("10_d5l53")])
+prefab_playback = ExtResource("13_y4o6s")
+prefab_game_ui = ExtResource("14_q8dnc")

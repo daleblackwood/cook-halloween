@@ -1,8 +1,11 @@
-[gd_scene load_steps=22 format=3 uid="uid://c10qlfh4w5t1y"]
+[gd_scene load_steps=22 format=3 uid="uid://o0k588u8ybis"]
 
-[ext_resource type="Script" path="res://Actors/GhostPlayer.gd" id="1_i4daa"]
-[ext_resource type="PackedScene" uid="uid://bwhsninbmtm43" path="res://Models/GhostModel.glb" id="1_man51"]
-[ext_resource type="Material" uid="uid://cd0f0skt0cjph" path="res://Actors/GhostMat.tres" id="3_caoed"]
+[ext_resource type="Script" path="res://Actors/PlayerPlayback.gd" id="1_lii05"]
+[ext_resource type="PackedScene" uid="uid://bwhsninbmtm43" path="res://Models/GhostModel.glb" id="2_l7x8w"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r75hb"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.368627)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tjpw6"]
 radius = 0.35
@@ -49,7 +52,6 @@ animation = &"wall_hang"
 [sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_gf63i"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_0ij2g"]
-graph_offset = Vector2(-1156.1, 44.3188)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_87fi3")
 nodes/Animation/position = Vector2(-600, 500)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_lghsy")
@@ -85,43 +87,44 @@ nodes/wall_hang_blend/node = SubResource("AnimationNodeBlend2_gf63i")
 nodes/wall_hang_blend/position = Vector2(0, 75)
 node_connections = [&"TimeScale", 0, &"run_fast_blend", &"air_charge_blend", 0, &"jump_blend", &"air_charge_blend", 1, &"air_charge_anim", &"air_dash_blend", 0, &"up_dash_blend", &"air_dash_blend", 1, &"air_dash", &"jump_blend", 0, &"wall_hang_blend", &"jump_blend", 1, &"jump_anim", &"output", 0, &"air_dash_blend", &"run_blend", 0, &"idle_anim", &"run_blend", 1, &"TimeScale", &"run_fast_blend", 0, &"run_anim", &"run_fast_blend", 1, &"Animation", &"up_dash_blend", 0, &"air_charge_blend", &"up_dash_blend", 1, &"up_dash", &"wall_hang_blend", 0, &"run_blend", &"wall_hang_blend", 1, &"wall_hang_anim"]
 
-[node name="Player" type="CharacterBody3D"]
-script = ExtResource("1_i4daa")
+[node name="PlayerPlayback" type="CharacterBody3D"]
+collision_layer = 2
+script = ExtResource("1_lii05")
 
-[node name="GhostModel" parent="." instance=ExtResource("1_man51")]
+[node name="GhostModel" parent="." instance=ExtResource("2_l7x8w")]
 
 [node name="Skeleton3D" parent="GhostModel/GhostArmature" index="0"]
-bones/0/position = Vector3(-9.29037e-09, 0.556879, -0.0204145)
+bones/0/position = Vector3(-5.47961e-09, 0.518158, -0.0415353)
 bones/0/rotation = Quaternion(0.167232, 1.17531e-07, 1.99356e-08, 0.985918)
-bones/1/rotation = Quaternion(0.00418108, -0.380072, 0.924913, 0.00801161)
-bones/2/rotation = Quaternion(-0.505224, 0.00194882, -0.00728182, 0.862955)
-bones/3/rotation = Quaternion(0.515105, -0.00410905, -0.000836121, 0.857117)
+bones/1/rotation = Quaternion(0.000315947, 0.441125, 0.897444, 0.00155274)
+bones/2/rotation = Quaternion(0.00346766, 0.00235043, -0.00130423, 0.99999)
+bones/3/rotation = Quaternion(0.613814, -6.55154e-05, 2.68755e-05, 0.789451)
 bones/4/rotation = Quaternion(0.130995, -1.18182e-07, 1.56158e-08, 0.991383)
 bones/5/rotation = Quaternion(-0.255866, 1.10583e-14, 2.28978e-17, 0.966712)
-bones/6/rotation = Quaternion(0.0644208, 0.280473, 0.934605, -0.209043)
+bones/6/rotation = Quaternion(-0.0358799, -0.162513, 0.962422, -0.214583)
 bones/6/scale = Vector3(1, 1, 1)
-bones/7/rotation = Quaternion(0.841573, -0.195484, -0.190245, 0.466206)
+bones/7/rotation = Quaternion(0.808731, -0.214407, -0.111908, 0.536154)
 bones/8/rotation = Quaternion(4.60737e-08, 1.68588e-07, -0.0753088, 0.99716)
-bones/9/rotation = Quaternion(0.0538688, -0.241867, 0.945633, 0.210659)
+bones/9/rotation = Quaternion(-0.0466817, 0.202055, 0.954672, 0.213534)
 bones/9/scale = Vector3(1, 1, 1)
-bones/10/rotation = Quaternion(0.801422, 0.21767, 0.0970056, 0.548573)
+bones/10/rotation = Quaternion(0.836193, 0.199232, 0.17568, 0.479818)
 bones/10/scale = Vector3(1, 1, 1)
 bones/11/rotation = Quaternion(5.3205e-08, -1.6408e-07, 0.0753088, 0.99716)
-bones/12/rotation = Quaternion(-2.42074e-05, 0.568706, 0.822541, -0.000117359)
-bones/13/rotation = Quaternion(0.00134351, -0.000590313, 9.30275e-05, 0.999999)
-bones/14/rotation = Quaternion(0.616131, 1.86789e-05, -7.24859e-06, 0.787644)
+bones/12/rotation = Quaternion(-0.00383384, -0.254882, 0.966938, -0.00719644)
+bones/13/rotation = Quaternion(-0.597686, 0.00169645, 0.00582935, 0.801707)
+bones/14/rotation = Quaternion(0.469913, 0.00581692, 0.00118345, 0.882693)
 
 [node name="GhostArms" parent="GhostModel/GhostArmature/Skeleton3D" index="0"]
-surface_material_override/0 = ExtResource("3_caoed")
+surface_material_override/0 = SubResource("StandardMaterial3D_r75hb")
 
 [node name="GhostBody" parent="GhostModel/GhostArmature/Skeleton3D" index="1"]
-surface_material_override/0 = ExtResource("3_caoed")
+surface_material_override/0 = SubResource("StandardMaterial3D_r75hb")
 
 [node name="GhostEyes" parent="GhostModel/GhostArmature/Skeleton3D" index="2"]
-surface_material_override/0 = ExtResource("3_caoed")
+surface_material_override/0 = SubResource("StandardMaterial3D_r75hb")
 
 [node name="GhostLegs" parent="GhostModel/GhostArmature/Skeleton3D" index="3"]
-surface_material_override/0 = ExtResource("3_caoed")
+surface_material_override/0 = SubResource("StandardMaterial3D_r75hb")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)

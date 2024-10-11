@@ -1,4 +1,4 @@
-[gd_scene load_steps=231 format=4 uid="uid://cxydnj1nlccsf"]
+[gd_scene load_steps=229 format=4 uid="uid://cxydnj1nlccsf"]
 
 [ext_resource type="Script" path="res://Levels/Stage.gd" id="1_m0nj2"]
 [ext_resource type="Script" path="res://Levels/PlayerCam.gd" id="2_gqt5i"]
@@ -19,9 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://dbq5nhubggsa4" path="res://Models/PumpkinTex.png" id="15_lioka"]
 [ext_resource type="Texture2D" uid="uid://bksxlunlbn3o3" path="res://Models/CandyTex.png" id="15_ue2f4"]
 [ext_resource type="PackedScene" uid="uid://b2nn4py18nmpx" path="res://Objects/Goal.tscn" id="16_40cgm"]
-[ext_resource type="PackedScene" uid="uid://br7rypx76entv" path="res://Levels/Env.tscn" id="17_3sdne"]
 [ext_resource type="ArrayMesh" uid="uid://dp7m7hb8sixg8" path="res://Models/Tree.obj" id="18_cbpkg"]
-[ext_resource type="Theme" uid="uid://o0xb575gd85j" path="res://ui/UITheme.tres" id="18_jpmvp"]
 
 [sub_resource type="Curve3D" id="Curve3D_vevce"]
 resource_name = "BlockShape3-GoCurve3D"
@@ -5778,9 +5776,6 @@ shape = SubResource("SphereShape3D_sn52j")
 
 [node name="Goal" parent="." instance=ExtResource("16_40cgm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 79, 7.96937, -201)
-
-[node name="GameUI" parent="." instance=ExtResource("17_3sdne")]
-theme = ExtResource("18_jpmvp")
 
 [node name="Env" type="Node3D" parent="."]
 

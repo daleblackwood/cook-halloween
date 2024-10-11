@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://br7rypx76entv"]
 
-[ext_resource type="Script" path="res://ui/UIPlayerCounters.gd" id="1_hw7j2"]
-[ext_resource type="PackedScene" uid="uid://i5oh1eukt2no" path="res://ui/UIPlayerCounter.tscn" id="1_pa6km"]
+[ext_resource type="Script" path="res://ui/UIPlayerCounters.gd" id="1_k3er8"]
+[ext_resource type="PackedScene" uid="uid://i5oh1eukt2no" path="res://ui/UIPlayerCounter.tscn" id="2_adxq1"]
 
 [node name="GameUI" type="Control"]
 layout_mode = 3
@@ -17,8 +17,8 @@ offset_left = 18.0
 offset_top = 17.0
 offset_right = 58.0
 offset_bottom = 57.0
-script = ExtResource("1_hw7j2")
+script = ExtResource("1_k3er8")
 seperation = 75.0
 
-[node name="UIPlayerCounter" parent="Counters" instance=ExtResource("1_pa6km")]
+[node name="UIPlayerCounter" parent="Counters" instance=ExtResource("2_adxq1")]
 scale = Vector2(0.8, 0.8)

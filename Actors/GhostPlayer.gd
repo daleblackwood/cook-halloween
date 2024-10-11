@@ -8,7 +8,8 @@ class_name GhostPlayer
 @export var dash_duration := 0.4
 @export var base_material: Material
 
-const GRAVITY = 40.0
+const GRAVITY := 40.0
+const GROUND_POS_INTERVAL := 0.5
 
 enum MoveState { Ground, Jump, AirCharge, UpDash, AirDash, MAX }
 
@@ -22,14 +23,15 @@ var look_dir = Vector3.FORWARD
 var time_in_air = 0.0
 var time_charging := 0.0
 var time_since_ground := 0.0
+var downtime := 0.5
 var move_state := MoveState.Ground
 var spawn_pos = Vector3.ZERO
 var anim: AnimationTree
 var want_jump := false
 var want_move := false
 var want_dash := false
-var jump_pressed := false
-var dash_pressed := false
+var jump_pressed := true
+var dash_pressed := true
 var move_dir := Vector3.ZERO
 var move_velocity := Vector3.ZERO
 var input_dir := Vector2.ZERO
@@ -94,7 +96,11 @@ func _physics_process(delta: float) -> void:
 	else:
 		move_dir = Vector3.ZERO
 		
-		
+	if downtime > 0.0:
+		downtime -= delta
+		jump_pressed = false
+		dash_pressed = false
+		move_dir = Vector3.ZERO	
 		
 	if is_on_floor():
 		time_since_ground = 0.0
@@ -150,7 +156,10 @@ func _physics_process(delta: float) -> void:
 			body.apply_impulse(velocity_to + Vector3.UP * 0.5)
 	
 	if global_transform.origin.y < -10.0:
-		global_transform.origin = ground_pos_b
+		if time_since_ground > 2.0:
+			global_transform.origin = ground_pos_b
+		else:
+			global_transform.origin = get_respawn_pos()
 	
 	
 func update_move_state(delta: float) -> MoveState:
@@ -165,6 +174,11 @@ func update_move_state(delta: float) -> MoveState:
 			return jump_update(delta)
 	return ground_update(delta)
 	
+	
+func get_respawn_pos() -> Vector3:
+	var pc = clampf(ground_pos_time / GROUND_POS_INTERVAL, 0.0, 1.0)
+	return ground_pos_b.lerp(ground_pos_a, pc)
+	
 		
 func ground_update(delta: float) -> MoveState:
 	time_in_air = 0.0
@@ -172,7 +186,7 @@ func ground_update(delta: float) -> MoveState:
 	
 	if not is_on_wall():
 		ground_pos_time += delta
-		if ground_pos_time > 0.5:
+		if ground_pos_time > GROUND_POS_INTERVAL:
 			ground_pos_b = ground_pos_a
 			ground_pos_a = global_transform.origin
 			ground_pos_time = 0.0

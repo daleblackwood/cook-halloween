@@ -8,10 +8,12 @@ const goal_in_time := 2.0
 var gooPower := 0.0
 var time := 0.0
 var initGooBasis: Basis
-var goal_countdown := 0.0
+var stage: Stage
 
 func _ready() -> void:
 	initGooBasis = goo.transform.basis
+	stage = (get_parent() as Stage)
+	stage.goal = self
 	
 
 func _process(delta: float) -> void:
@@ -21,19 +23,14 @@ func _process(delta: float) -> void:
 	if gooPower > 0.0:
 		gooPower -= delta
 	goo.transform.basis = gooBasis
-	if goal_countdown > 0.0:
-		goal_countdown -= delta
-		if goal_countdown <= 0.0:
-			GhostGame.end_level()
 	
 
 func _on_cauldron_area_entered(body) -> void:
 	if not is_instance_of(body, GhostPlayer):
 		return
-	print("in goal")	
 	CookSFX.play("cauldron", global_transform.origin)
 	gooPower = 1.0
-	goal_countdown = goal_in_time
+	stage.set_player_in_goal((body as GhostPlayer).index, true)
 
 
 func _on_cauldron_area_exited(body) -> void:
@@ -41,4 +38,4 @@ func _on_cauldron_area_exited(body) -> void:
 		return
 	print("out of goal")
 	gooPower = 1.0
-	goal_countdown = 0.0
+	stage.set_player_in_goal((body as GhostPlayer).index, true)

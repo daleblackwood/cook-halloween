@@ -8,14 +8,14 @@
 [sub_resource type="Resource" id="Resource_dhh0j"]
 script = ExtResource("1_chufr")
 file = ExtResource("2_o0pcb")
-loop_start = 4.0
+loop_start = 2.0
 loop_end = 50.0
 volume = 1.0
 
 [sub_resource type="Resource" id="Resource_t8l52"]
 script = ExtResource("1_chufr")
 file = ExtResource("3_45pfn")
-loop_start = 4.0
+loop_start = 2.0
 loop_end = 50.0
 volume = 1.0
 

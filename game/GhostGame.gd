@@ -10,6 +10,8 @@ const MAX_PLAYER_COUNT = 4
 @export var scene_end_level: PackedScene
 @export var scene_end_game: PackedScene
 @export var player_mats: Array[Material]
+@export var prefab_playback: PackedScene
+@export var prefab_game_ui: PackedScene
 
 
 class Player:

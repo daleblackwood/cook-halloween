@@ -12,7 +12,7 @@ height = 0.6
 radius = 0.2
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_sn52j"]
-radius = 1.0
+radius = 2.0
 
 [node name="Candy" type="RigidBody3D"]
 collision_layer = 2

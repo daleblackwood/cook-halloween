@@ -17,7 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://dbq5nhubggsa4" path="res://Models/PumpkinTex.png" id="12_lerpu"]
 [ext_resource type="PackedScene" uid="uid://daxp43c25vn55" path="res://Objects/Tree.tscn" id="13_7q50d"]
 [ext_resource type="PackedScene" uid="uid://b2nn4py18nmpx" path="res://Objects/Goal.tscn" id="13_8k6sy"]
-[ext_resource type="PackedScene" uid="uid://br7rypx76entv" path="res://Levels/Env.tscn" id="14_ja135"]
+[ext_resource type="PackedScene" uid="uid://br7rypx76entv" path="res://GameUI.tscn" id="14_ja135"]
 [ext_resource type="Theme" uid="uid://o0xb575gd85j" path="res://ui/UITheme.tres" id="15_mehna"]
 [ext_resource type="ArrayMesh" uid="uid://btan55fbcubf4" path="res://Objects/Candy.obj" id="17_mphy5"]
 [ext_resource type="Texture2D" uid="uid://bksxlunlbn3o3" path="res://Models/CandyTex.png" id="18_k1yac"]

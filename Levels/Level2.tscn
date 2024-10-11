@@ -1,4 +1,4 @@
-[gd_scene load_steps=396 format=4 uid="uid://f4yvswj16cix"]
+[gd_scene load_steps=394 format=4 uid="uid://f4yvswj16cix"]
 
 [ext_resource type="Script" path="res://Levels/Stage.gd" id="1_m5ccr"]
 [ext_resource type="Script" path="res://Levels/PlayerCam.gd" id="4_0sf7d"]
@@ -21,8 +21,6 @@
 [ext_resource type="PackedScene" uid="uid://daxp43c25vn55" path="res://Objects/Tree.tscn" id="17_sxjtl"]
 [ext_resource type="ArrayMesh" uid="uid://bxv1owjf2hyi7" path="res://Models/Pumpkin.obj" id="17_wyfiw"]
 [ext_resource type="Texture2D" uid="uid://dbq5nhubggsa4" path="res://Models/PumpkinTex.png" id="18_c1qis"]
-[ext_resource type="PackedScene" uid="uid://br7rypx76entv" path="res://Levels/Env.tscn" id="19_r173v"]
-[ext_resource type="Theme" uid="uid://o0xb575gd85j" path="res://ui/UITheme.tres" id="20_n3weo"]
 [ext_resource type="ArrayMesh" uid="uid://btan55fbcubf4" path="res://Objects/Candy.obj" id="21_wx57e"]
 [ext_resource type="Texture2D" uid="uid://bksxlunlbn3o3" path="res://Models/CandyTex.png" id="22_53h4p"]
 [ext_resource type="ArrayMesh" uid="uid://dp7m7hb8sixg8" path="res://Models/Tree.obj" id="25_ay2ui"]
@@ -10328,9 +10326,6 @@ shape = SubResource("CylinderShape3D_4mskq")
 
 [node name="Goal" parent="." instance=ExtResource("13_sllv3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 110.617, 10.4989, -289.164)
-
-[node name="GameUI" parent="." instance=ExtResource("19_r173v")]
-theme = ExtResource("20_n3weo")
 
 [node name="Env" type="Node3D" parent="."]
 

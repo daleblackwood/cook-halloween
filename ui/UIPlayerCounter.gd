@@ -24,4 +24,7 @@ func setup(index: int, color: Color) -> void:
 	self.player_index = index
 	self.color = color
 	get_node("Colorbar").color = color
-	title_label.text = " P%d" % (player_index + 1)
+	if index == 1 and GhostGame.player_count < 2:
+		title_label.text = " GHOST"
+	else:
+		title_label.text = " P%d" % (player_index + 1)
