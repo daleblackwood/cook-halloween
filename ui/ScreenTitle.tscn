@@ -1,12 +1,9 @@
-[gd_scene load_steps=21 format=4 uid="uid://c8qnmj5ilihkv"]
+[gd_scene load_steps=6 format=3 uid="uid://c8qnmj5ilihkv"]
 
 [ext_resource type="Theme" uid="uid://o0xb575gd85j" path="res://ui/UITheme.tres" id="1_rnfa7"]
 [ext_resource type="Script" path="res://addons/cookpot/CookUIInputGroup.gd" id="2_yfoib"]
-[ext_resource type="Script" path="res://addons/goshapes/base/GoCurve3D.gd" id="3_1y025"]
-[ext_resource type="Script" path="res://addons/goshapes/Goshape.gd" id="4_oixlq"]
-[ext_resource type="Script" path="res://addons/goshapes/base/PathOptions.gd" id="5_jnd4d"]
-[ext_resource type="Resource" uid="uid://dmigsccm6eewu" path="res://Shapes/BlockYellow.tres" id="6_d2hcp"]
-[ext_resource type="Material" uid="uid://b2pnaoaw4blgc" path="res://Objects/GrassMat.tres" id="7_h0c4q"]
+[ext_resource type="PackedScene" uid="uid://5qvjpeulkf4" path="res://ui/MenuEnv.tscn" id="3_gju3t"]
+[ext_resource type="PackedScene" uid="uid://b3roqhut185og" path="res://Models/SpoookyLogo.glb" id="9_s0old"]
 
 [sub_resource type="GDScript" id="GDScript_a84dh"]
 script/source = "extends Control
@@ -16,114 +13,21 @@ func _ready() -> void:
 	CookMusic.play(\"GhostTitle\")
 
 func _on_1player_pressed() -> void:
-	GhostGame.start(1)
+	_start(1)
 
 func _on_2players_pressed() -> void:
-	GhostGame.start(2)	
+	_start(2)	
 	
 func _on_3players_pressed() -> void:
-	GhostGame.start(3)	
+	_start(3)	
 
 func _on_4players_pressed() -> void:
-	GhostGame.start(4)	
+	_start(4)	
+	
+func _start(player_count: int) -> void:
+	GhostGame.set_players(player_count)
+	GhostGame.to_controls()
 "
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rlto2"]
-sky_top_color = Color(0.519296, 0.394659, 0.562176, 1)
-sky_horizon_color = Color(0.759457, 0.603997, 0.677893, 1)
-ground_bottom_color = Color(0.248634, 0.134231, 0.175892, 1)
-ground_horizon_color = Color(0.760784, 0.603922, 0.678431, 1)
-
-[sub_resource type="Sky" id="Sky_g6sgd"]
-sky_material = SubResource("ProceduralSkyMaterial_rlto2")
-
-[sub_resource type="Environment" id="Environment_r588o"]
-background_mode = 2
-sky = SubResource("Sky_g6sgd")
-fog_enabled = true
-fog_light_color = Color(0.247059, 0.133333, 0.176471, 1)
-fog_density = 0.005
-fog_sky_affect = 0.0
-fog_height_density = 0.3616
-
-[sub_resource type="Curve3D" id="Curve3D_h3wkd"]
-resource_name = "BlockShape3-GoCurve3D"
-_data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -11.3601, 0, 9.14776, 0, 0, 0, 0, 0, 0, 12.9197, 0, 9.14776, 0, 0, 0, 0, 0, 0, 12.9197, 0, -8.9911, 0, 0, 0, 0, 0, 0, -11.3601, 0, -8.9911),
-"tilts": PackedFloat32Array(0, 0, 0, 0)
-}
-point_count = 4
-script = ExtResource("3_1y025")
-
-[sub_resource type="Resource" id="Resource_hv6i4"]
-resource_name = "BlockShape3-PathOptions"
-script = ExtResource("5_jnd4d")
-flatten = true
-twist = false
-line = 0.0
-rounding = 0.0
-rounding_mode = 0
-interpolate = 1
-points_on_ground = false
-offset_y = 0.0
-ground_placement_mask = 0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_thcfb"]
-albedo_color = Color(0.892928, 0.788308, 0.436576, 1)
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_owmyl"]
-resource_name = "BlockShape3Cap0"
-_surfaces = [{
-"aabb": AABB(-11.3601, 0, -8.9911, 24.2798, 1e-05, 18.1389),
-"attribute_data": PackedByteArray("+MI1wTpdEkEXt05BOl0SQRe3TkGM2w/B+MI1wYzbD8E="),
-"format": 34359742487,
-"index_count": 6,
-"index_data": PackedByteArray("AAADAAIAAgABAAAA"),
-"material": SubResource("StandardMaterial3D_thcfb"),
-"primitive": 3,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 4,
-"vertex_data": PackedByteArray("+MI1wQAAAAA6XRJBF7dOQQAAAAA6XRJBF7dOQQAAAACM2w/B+MI1wQAAAACM2w/B/3///wAA/7//f///AAD/v/9///8AAP+//3///wAA/78=")
-}]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hj5nw"]
-albedo_color = Color(0, 0, 0, 1)
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_42yd2"]
-resource_name = "BlockShape3Wall0"
-_surfaces = [{
-"aabb": AABB(-11.3601, -12.7, -8.9911, 24.2798, 12.7, 18.1389),
-"attribute_data": PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAG7RQkEAAAAAAAAAADMzS0Fu0UJBMzNLQW7RQkEAAAAAVy6qQQAAAABu0UJBMzNLQVcuqkEzM0tBVy6qQQAAAACHywVCAAAAAFcuqkEzM0tBh8sFQjMzS0GHywVCAAAAAAAAAAAAAAAAh8sFQjMzS0EAAAAAMzNLQQ=="),
-"format": 34359742487,
-"index_count": 48,
-"index_data": PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAARABMAEgAQABMAFAAVABcAFgAUABcAGAAZABsAGgAYABsAHAAdAB8AHgAcAB8A"),
-"material": SubResource("StandardMaterial3D_hj5nw"),
-"primitive": 3,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 32,
-"vertex_data": PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA+MI1wQAAAAA6XRJBF7dOQQAAAAA6XRJB+MI1wTMzS8E6XRJBF7dOQTMzS8E6XRJBF7dOQQAAAAA6XRJBF7dOQQAAAACM2w/BF7dOQTMzS8E6XRJBF7dOQTMzS8GM2w/BF7dOQQAAAACM2w/B+MI1wQAAAACM2w/BF7dOQTMzS8GM2w/B+MI1wTMzS8GM2w/B+MI1wQAAAACM2w/B+MI1wQAAAAA6XRJB+MI1wTMzS8GM2w/B+MI1wTMzS8E6XRJB/3///wAA/7//f///AAD/v/9///8AAP+//3///wAA/7//f///AAD/v/9///8AAP+//3///wAA/7//f///AAD/v/9///8AAP+//3///wAA/7//f///AAD/v/9///8AAP+//3///wAA/7//f///AAD/v/9///8AAP+//3///wAA/7//P/9/qqqpqv+//39UVamqVFX/f5GkbZuqqv9/bVttm/+//39UVamq////v6qqqapU1f9/bVvatv//qaqRpNq2////v6qqqaoAAP+/VFWpqv//VNWRpG2bAABU1W1bbZsAAP+/VFWpqv8//3+qqqmqAACpqm1b2raqKv9/kaTatg==")
-}]
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_5chay"]
-resource_name = "BlockShape3Wall0"
-_surfaces = [{
-"aabb": AABB(-11.3601, 0, -8.9911, 24.2798, 0.8, 18.1389),
-"attribute_data": PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAG7RQkEAAAAAAAAAAM3MTD9u0UJBzcxMP27RQkEAAAAAVy6qQQAAAABu0UJBzcxMP1cuqkHNzEw/Vy6qQQAAAACHywVCAAAAAFcuqkHNzEw/h8sFQs3MTD+HywVCAAAAAAAAAAAAAAAAh8sFQs3MTD8AAAAAzcxMPw=="),
-"format": 34359742487,
-"index_count": 48,
-"index_data": PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAARABMAEgAQABMAFAAVABcAFgAUABcAGAAZABsAGgAYABsAHAAdAB8AHgAcAB8A"),
-"material": ExtResource("7_h0c4q"),
-"primitive": 3,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 32,
-"vertex_data": PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA+MI1wc3MTD86XRJBF7dOQc3MTD86XRJB+MI1wQAAAAA6XRJBF7dOQQAAAAA6XRJBF7dOQc3MTD86XRJBF7dOQc3MTD+M2w/BF7dOQQAAAAA6XRJBF7dOQQAAAACM2w/BF7dOQc3MTD+M2w/B+MI1wc3MTD+M2w/BF7dOQQAAAACM2w/B+MI1wQAAAACM2w/B+MI1wc3MTD+M2w/B+MI1wc3MTD86XRJB+MI1wQAAAACM2w/B+MI1wQAAAAA6XRJB/3///wAA/7//f///AAD/v/9///8AAP+//3///wAA/7//f///AAD/v/9///8AAP+//3///wAA/7//f///AAD/v/9///8AAP+//3///wAA/7//f///AAD/v/9///8AAP+//3///wAA/7//f///AAD/v/9///8AAP+//3///wAA/7//P/9/qqqpqv+//39UVamqVFX/f5GkbZuqqv9/bVttm/+//39UVamq////v6qqqapU1f9/bVvatv//qaqRpNq2////v6qqqaoAAP+/VFWpqv//VNWRpG2bAABU1W1bbZsAAP+/VFWpqv8//3+qqqmqAACpqm1b2raqKv9/kaTatg==")
-}]
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ree4f"]
-data = PackedVector3Array(-11.3601, 0, 9.1478, -11.3601, 0, -8.9911, 12.9197, 0, -8.9911, 12.9197, 0, -8.9911, 12.9197, 0, 9.1478, -11.3601, 0, 9.1478)
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_wn0t7"]
-data = PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -11.3601, 0, 9.1478, 12.9197, 0, 9.1478, 12.9197, -12.7, 9.1478, -11.3601, -12.7, 9.1478, -11.3601, 0, 9.1478, 12.9197, -12.7, 9.1478, 12.9197, 0, 9.1478, 12.9197, 0, -8.9911, 12.9197, -12.7, -8.9911, 12.9197, -12.7, 9.1478, 12.9197, 0, 9.1478, 12.9197, -12.7, -8.9911, 12.9197, 0, -8.9911, -11.3601, 0, -8.9911, -11.3601, -12.7, -8.9911, 12.9197, -12.7, -8.9911, 12.9197, 0, -8.9911, -11.3601, -12.7, -8.9911, -11.3601, 0, -8.9911, -11.3601, 0, 9.1478, -11.3601, -12.7, 9.1478, -11.3601, -12.7, -8.9911, -11.3601, 0, -8.9911, -11.3601, -12.7, 9.1478)
 
 [node name="TitleScreen" type="Control"]
 layout_mode = 3
@@ -135,27 +39,6 @@ grow_vertical = 2
 theme = ExtResource("1_rnfa7")
 script = SubResource("GDScript_a84dh")
 
-[node name="Label" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -291.0
-offset_top = -125.0
-offset_right = 291.0
-offset_bottom = -3.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 10
-theme_override_constants/outline_size = 10
-theme_override_font_sizes/font_size = 100
-text = "JELLOWEEN"
-
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
@@ -163,10 +46,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -205.5
-offset_top = 48.0
-offset_right = 205.5
-offset_bottom = 105.0
+offset_left = -470.0
+offset_top = 169.0
+offset_right = 470.0
+offset_bottom = 226.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 20
@@ -192,50 +75,25 @@ custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
 text = "4 PLAYERS"
 
-[node name="Node3D" type="Node3D" parent="."]
+[node name="MenuEnv" parent="." instance=ExtResource("3_gju3t")]
 
-[node name="Env" type="Node3D" parent="Node3D"]
+[node name="SpoookyLogo" parent="." instance=ExtResource("9_s0old")]
+transform = Transform3D(2.91672, 0, 3.56353, 0, 4.605, 0, -3.56353, 0, 2.91672, 6.71, 3.109, 5.726)
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Node3D/Env"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 5.11472, 0)
-light_energy = 0.5
-shadow_enabled = true
-
-[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="Node3D/Env"]
-transform = Transform3D(0.847033, 0.241301, -0.473613, 0.160446, 0.733389, 0.660604, 0.506747, -0.635542, 0.582489, 0, 5.11472, 0)
-light_energy = 0.5
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="Node3D/Env"]
-environment = SubResource("Environment_r588o")
-
-[node name="BlockShape3" type="Path3D" parent="Node3D"]
-curve = SubResource("Curve3D_h3wkd")
-script = ExtResource("4_oixlq")
-path_options = SubResource("Resource_hv6i4")
-shaper = ExtResource("6_d2hcp")
-metadata/_edit_group_ = true
-
-[node name="BlockShape3Cap0Mesh" type="MeshInstance3D" parent="Node3D/BlockShape3"]
-mesh = SubResource("ArrayMesh_owmyl")
-
-[node name="BlockShape3Wall0Mesh" type="MeshInstance3D" parent="Node3D/BlockShape3"]
-mesh = SubResource("ArrayMesh_42yd2")
-
-[node name="@MeshInstance3D@30315" type="MeshInstance3D" parent="Node3D/BlockShape3"]
-mesh = SubResource("ArrayMesh_5chay")
-
-[node name="BlockShape3Cap0Body" type="StaticBody3D" parent="Node3D/BlockShape3"]
-
-[node name="BlockShape3Cap0Collider" type="CollisionShape3D" parent="Node3D/BlockShape3/BlockShape3Cap0Body"]
-shape = SubResource("ConcavePolygonShape3D_ree4f")
-
-[node name="BlockShape3Wall0Body" type="StaticBody3D" parent="Node3D/BlockShape3"]
-
-[node name="BlockShape3Wall0Collider" type="CollisionShape3D" parent="Node3D/BlockShape3/BlockShape3Wall0Body"]
-shape = SubResource("ConcavePolygonShape3D_wn0t7")
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.981293, 0.192522, 0, -0.144413, 0.736078, 0.661312, 0.127317, -0.648941, 0.750111, -9.0342, 5.41793, 14.2298)
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -58.175
+offset_bottom = -9.17499
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.495585, 0.239217, 0.154518, 1)
+theme_override_font_sizes/font_size = 20
+text = "BY COMPLETELY COOKED GAMES / DALE BLACKWOOD / 2024"
+horizontal_alignment = 1
 
 [connection signal="pressed" from="HBoxContainer/1Player" to="." method="_on_1player_pressed"]
 [connection signal="pressed" from="HBoxContainer/2Players" to="." method="_on_2players_pressed"]

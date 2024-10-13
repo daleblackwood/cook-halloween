@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://dc6joxg1h0sql"]
+
+[ext_resource type="Script" path="res://ui/UIPlayerCounters.gd" id="1_ena5j"]
+[ext_resource type="PackedScene" uid="uid://i5oh1eukt2no" path="res://ui/UIPlayerCounter.tscn" id="2_ndy6w"]
+
+[node name="UIPlayerCountersFull" type="HBoxContainer"]
+custom_minimum_size = Vector2(0, 75)
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -75.0
+offset_bottom = 75.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 30
+alignment = 1
+script = ExtResource("1_ena5j")
+
+[node name="UICounterContainer" type="Control" parent="."]
+custom_minimum_size = Vector2(170, 150)
+layout_mode = 2
+
+[node name="UIPlayerCounter" parent="UICounterContainer" instance=ExtResource("2_ndy6w")]
+layout_mode = 2
+offset_right = 85.0
+offset_bottom = 75.0
+scale = Vector2(2, 2)

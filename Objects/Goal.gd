@@ -26,7 +26,7 @@ func _process(delta: float) -> void:
 	
 
 func _on_cauldron_area_entered(body) -> void:
-	if not is_instance_of(body, GhostPlayer):
+	if not is_instance_of(body, GhostPlayer) and not is_instance_of(body, PlayerPlayback):
 		return
 	CookSFX.play("cauldron", global_transform.origin)
 	gooPower = 1.0
@@ -34,8 +34,7 @@ func _on_cauldron_area_entered(body) -> void:
 
 
 func _on_cauldron_area_exited(body) -> void:
-	if not is_instance_of(body, GhostPlayer):
+	if not is_instance_of(body, GhostPlayer) and not is_instance_of(body, PlayerPlayback):
 		return
-	print("out of goal")
 	gooPower = 1.0
 	stage.set_player_in_goal((body as GhostPlayer).index, true)

@@ -8,8 +8,8 @@ extends Node3D
 
 enum PlaybackStatus { Init, PlayerWon, ReplayWon }
 
-var players_in_goal: Array[int] = []
-var seconds_in_goal := 0.0
+var players_in_goal: Array[bool] = []
+var seconds_in_goal: float = 0.0
 var time_to_pentaly := 0.0
 var recorder: PlayerRecorder
 var playback: PlayerPlayback
@@ -20,7 +20,13 @@ var lead_target: Node3D = null
 var respawn_pos: Vector3
 
 func _ready() -> void:
-	CookMusic.play("GhostGameplay")
+	if GhostGame.level_index < 0:
+		for i in range(GhostGame.levels.size()):
+			if GhostGame.levels[i].resource_path == get_tree().current_scene.scene_file_path:
+				print(get_tree().current_scene.scene_file_path)
+				GhostGame.level_index = i
+				break
+	players_in_goal.resize(4)
 	CookSFX.play("lightning", CookSFX.NO_SOURCE, 0.4)
 	if spawn_point:
 		spawn_actors(spawn_point.global_transform.origin)
@@ -44,9 +50,9 @@ func _ready() -> void:
 	
 		
 func _process(delta: float) -> void:
-	var in_goal := players_in_goal.size() > 0
-	if playback != null:
-		if playback.is_done:
+	var in_goal := false
+	for i in range(4):
+		if players_in_goal[i]:
 			in_goal = true
 					
 	if in_goal:
@@ -55,15 +61,20 @@ func _process(delta: float) -> void:
 		seconds_in_goal = 0.0
 		time_to_pentaly = 0.0
 		
-	if seconds_in_goal > 2.0:
+	if seconds_in_goal > 1.0:
 		time_to_pentaly -= delta
 		if time_to_pentaly < 0.0:
 			time_to_pentaly = 0.5
 			var one_outside = false
+			CookSFX.play("penalty", CookSFX.NO_SOURCE, 0.2)
 			for p in players:
 				if not is_in_goal(p.index):
-					CookSave.increase_count("candy", -1, p.index)
+					var penalty = floor(seconds_in_goal / 10) + 1
+					CookSave.increase_count("candy", -penalty, p.index)
 					one_outside = true
+			if playback != null and not is_in_goal(1):
+				one_outside = true#CookSave.get_count("candy", 1) > CookSave.get_count("candy", 0)
+				playback.score_offset -= 1
 			if not one_outside:
 				if recorder != null:
 					if CookSave.get_count("candy", 0) > CookSave.get_count("candy", 1):
@@ -74,10 +85,12 @@ func _process(delta: float) -> void:
 	for player in players:
 		if not is_in_goal(player.index):
 			targets.append(player)
+	if targets.size() < 1 and playback != null:
+		targets.append(playback)
 	var closest_sq := INF
 	lead_target = null
 	for target in targets:
-		if target == null:
+		if target == null or is_in_goal(target.index):
 			continue
 		if goal:
 			var dist_sq = (goal.global_transform.origin - target.global_transform.origin).length_squared()
@@ -85,7 +98,7 @@ func _process(delta: float) -> void:
 				lead_target = target
 				closest_sq = dist_sq
 				
-	if lead_target:
+	if is_instance_of(lead_target, GhostPlayer):
 		respawn_pos = (lead_target as GhostPlayer).get_respawn_pos()
 		for target in targets:
 			if target == lead_target:
@@ -117,19 +130,10 @@ func spawn_actors(origin: Vector3) -> void:
 
 
 func set_player_in_goal(index: int, inside: bool) -> void:
-	var existing = -1
-	for i in range(players_in_goal.size()):
-		if players_in_goal[i] == index:
-			existing = i
-			break
-	if inside and existing < 0:
-		players_in_goal.append(index)
-	elif not inside and existing >= 0:
-		players_in_goal.remove_at(index)
+	if players_in_goal[index] != inside:
+		players_in_goal[index] = inside
+		print("player %d %s goal" % [index, "inside" if inside else "outside"])
 		
 		
 func is_in_goal(index: int) -> bool:
-	for i in range(players_in_goal.size()):
-		if players_in_goal[i] == index:
-			return true
-	return false
+	return players_in_goal[index]

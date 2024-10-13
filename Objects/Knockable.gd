@@ -18,7 +18,7 @@ func knock(dir: Vector3) -> void:
 func explode() -> void:
 	CookSFX.play("smash", global_transform.origin)
 	CookGFX.fire_bodies(4, "candy", global_transform.origin, 5.0, 8.0)
-	CookGFX.fire_bodies(6, "pumpkinfrag", global_transform.origin, 10.0, 16.0)
+	CookGFX.fire_bodies(6, "pumpkinfrag", global_transform.origin, 6.0, 8.0)
 	queue_free()
 
 

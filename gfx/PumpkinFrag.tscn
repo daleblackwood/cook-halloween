@@ -10,6 +10,7 @@ radius = 0.35
 albedo_texture = ExtResource("2_lsf53")
 
 [node name="PumpkinFrag" type="RigidBody3D"]
+collision_layer = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_hx6ux")

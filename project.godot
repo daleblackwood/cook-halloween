@@ -97,7 +97,3 @@ ui_text_completion_query={
 [physics]
 
 3d/default_gravity=40.0
-
-[rendering]
-
-anti_aliasing/quality/screen_space_aa=1

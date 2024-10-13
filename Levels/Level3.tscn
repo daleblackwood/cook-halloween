@@ -1,4 +1,4 @@
-[gd_scene load_steps=350 format=4 uid="uid://dx5si4m8m6206"]
+[gd_scene load_steps=352 format=4 uid="uid://dx5si4m8m6206"]
 
 [ext_resource type="Script" path="res://Levels/Stage.gd" id="1_bfmv6"]
 [ext_resource type="Script" path="res://Levels/PlayerCam.gd" id="2_vtb7q"]
@@ -17,11 +17,12 @@
 [ext_resource type="Texture2D" uid="uid://dbq5nhubggsa4" path="res://Models/PumpkinTex.png" id="12_lerpu"]
 [ext_resource type="PackedScene" uid="uid://daxp43c25vn55" path="res://Objects/Tree.tscn" id="13_7q50d"]
 [ext_resource type="PackedScene" uid="uid://b2nn4py18nmpx" path="res://Objects/Goal.tscn" id="13_8k6sy"]
-[ext_resource type="PackedScene" uid="uid://br7rypx76entv" path="res://GameUI.tscn" id="14_ja135"]
+[ext_resource type="PackedScene" uid="uid://br7rypx76entv" path="res://ui/GameUI.tscn" id="14_ja135"]
 [ext_resource type="Theme" uid="uid://o0xb575gd85j" path="res://ui/UITheme.tres" id="15_mehna"]
 [ext_resource type="ArrayMesh" uid="uid://btan55fbcubf4" path="res://Objects/Candy.obj" id="17_mphy5"]
 [ext_resource type="Texture2D" uid="uid://bksxlunlbn3o3" path="res://Models/CandyTex.png" id="18_k1yac"]
 [ext_resource type="ArrayMesh" uid="uid://dp7m7hb8sixg8" path="res://Models/Tree.obj" id="21_13gi1"]
+[ext_resource type="ArrayMesh" uid="uid://chq3o0l8ckscj" path="res://Models/Clouds.obj" id="23_12o3h"]
 
 [sub_resource type="Curve3D" id="Curve3D_4uwpv"]
 resource_name = "BlockShape4-GoCurve3D"
@@ -3338,25 +3339,31 @@ roughness = 0.59
 height = 0.8
 radius = 0.55
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_l4a75"]
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6k4l6"]
 sky_top_color = Color(0.519296, 0.394659, 0.562176, 1)
 sky_horizon_color = Color(0.759457, 0.603997, 0.677893, 1)
 ground_bottom_color = Color(0.248634, 0.134231, 0.175892, 1)
 ground_horizon_color = Color(0.760784, 0.603922, 0.678431, 1)
 
-[sub_resource type="Sky" id="Sky_l0n1t"]
-sky_material = SubResource("ProceduralSkyMaterial_l4a75")
+[sub_resource type="Sky" id="Sky_qd66v"]
+sky_material = SubResource("ProceduralSkyMaterial_6k4l6")
 
-[sub_resource type="Environment" id="Environment_j4xxv"]
+[sub_resource type="Environment" id="Environment_n76kr"]
 background_mode = 2
-sky = SubResource("Sky_l0n1t")
+sky = SubResource("Sky_qd66v")
 fog_enabled = true
 fog_light_color = Color(0.247059, 0.133333, 0.176471, 1)
 fog_density = 0.005
 fog_sky_affect = 0.0
 fog_height_density = 0.3616
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e33gn"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.176471)
+roughness = 0.49
+
 [node name="TestStage" type="Node3D" node_paths=PackedStringArray("goal", "spawn_point")]
+process_mode = 1
 script = ExtResource("1_bfmv6")
 goal = NodePath("Goal")
 spawn_point = NodePath("Spawnpoint")
@@ -10033,6 +10040,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 172, 45.9694, -352)
 [node name="GameUI" parent="." instance=ExtResource("14_ja135")]
 theme = ExtResource("15_mehna")
 
+[node name="Spawnpoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.9649)
+
 [node name="Env" type="Node3D" parent="."]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Env"]
@@ -10045,10 +10055,13 @@ transform = Transform3D(0.847033, 0.241301, -0.473613, 0.160446, 0.733389, 0.660
 light_energy = 0.5
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Env"]
-environment = SubResource("Environment_j4xxv")
+environment = SubResource("Environment_n76kr")
 
-[node name="Spawnpoint" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.9649)
+[node name="Clouds" type="MeshInstance3D" parent="Env"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 1, 0, -26.3783, -234)
+mesh = ExtResource("23_12o3h")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_e33gn")
 
 [connection signal="body_entered" from="ScatterShape55/Candy26/Area3D2" to="ScatterShape55/Candy26" method="_on_body_entered"]
 [connection signal="body_entered" from="ScatterShape55/Candy50/Area3D2" to="ScatterShape55/Candy50" method="_on_body_entered"]

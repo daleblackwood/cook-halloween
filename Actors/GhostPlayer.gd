@@ -156,6 +156,8 @@ func _physics_process(delta: float) -> void:
 			body.apply_impulse(velocity_to + Vector3.UP * 0.5)
 	
 	if global_transform.origin.y < -10.0:
+		CookSave.increase_count("candy", -10, index)
+		CookSFX.play("hurt", global_transform.origin)
 		if time_since_ground > 2.0:
 			global_transform.origin = ground_pos_b
 		else:

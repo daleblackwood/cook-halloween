@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://ch60wbpjxxlly"]
+
+[ext_resource type="Theme" uid="uid://o0xb575gd85j" path="res://ui/UITheme.tres" id="1_c3aja"]
+[ext_resource type="PackedScene" uid="uid://5qvjpeulkf4" path="res://ui/MenuEnv.tscn" id="3_65j7r"]
+[ext_resource type="Texture2D" uid="uid://cdbip7fnppsa1" path="res://ui/controls.png" id="4_c678r"]
+[ext_resource type="PackedScene" uid="uid://b3roqhut185og" path="res://Models/SpoookyLogo.glb" id="4_dnvdq"]
+
+[sub_resource type="GDScript" id="GDScript_a84dh"]
+script/source = "extends Control
+
+func _ready() -> void:
+	GhostGame.set_scene(self)
+	CookMusic.play(\"GhostTitle\")
+
+func _process(delta: float) -> void:
+	for i in CookInput.player_count:
+		if CookInput.get_input(i).primary_fired or CookInput.get_input(i).start_fired:
+			GhostGame.start()
+"
+
+[node name="ControlsScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_c3aja")
+script = SubResource("GDScript_a84dh")
+
+[node name="MenuEnv" parent="." instance=ExtResource("3_65j7r")]
+
+[node name="SpoookyLogo" parent="." instance=ExtResource("4_dnvdq")]
+transform = Transform3D(2.91672, 0, 3.56353, 0, 4.605, 0, -3.56353, 0, 2.91672, 6.71, 3.109, 5.726)
+
+[node name="Controls" type="Sprite2D" parent="."]
+position = Vector2(652, 400)
+scale = Vector2(0.384801, 0.384801)
+texture = ExtResource("4_c678r")
