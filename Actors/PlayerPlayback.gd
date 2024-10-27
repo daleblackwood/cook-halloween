@@ -1,6 +1,8 @@
 class_name PlayerPlayback
 extends Node3D
 
+const ALLOW_USER_GHOST := false
+
 var recorder: CookRecorder
 var time := 0.0
 var look_dir := Vector3.FORWARD
@@ -25,8 +27,8 @@ func play(level_index: int) -> bool:
 	
 	
 static func get_replay_path(level_index: int) -> String:
-	var path = "user://replay%d.dat" % level_index
-	if not FileAccess.file_exists(path):
+	var path = ("user://replay%d.dat" % level_index) if ALLOW_USER_GHOST else null
+	if path == null or not FileAccess.file_exists(path):
 		path = "res://data/replay%d.dat" % level_index
 		if not FileAccess.file_exists(path):
 			return ""

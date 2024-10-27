@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c53boco5mekqq"]
+[gd_scene load_steps=17 format=3 uid="uid://c53boco5mekqq"]
 
 [ext_resource type="Script" path="res://game/GhostGame.gd" id="1_6uowk"]
 [ext_resource type="PackedScene" uid="uid://cxydnj1nlccsf" path="res://Levels/Level1.tscn" id="2_2cgox"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://be6hiwf8klopg" path="res://ui/ScreenLevelEnd.tscn" id="7_dnqbl"]
 [ext_resource type="PackedScene" uid="uid://ch60wbpjxxlly" path="res://ui/ScreenControls.tscn" id="7_e7nbo"]
 [ext_resource type="Material" uid="uid://cd0f0skt0cjph" path="res://Actors/GhostMat.tres" id="7_jhxx4"]
+[ext_resource type="PackedScene" uid="uid://1m4yx3ovhr8c" path="res://ui/ScreenSettings.tscn" id="7_o3wbr"]
 [ext_resource type="PackedScene" uid="uid://tmtp4j8fhbq" path="res://ui/ScreenGameEnd.tscn" id="8_0bxko"]
 [ext_resource type="Material" uid="uid://bdoqlgdckhil1" path="res://Actors/GhostMat2.tres" id="8_kjelk"]
 [ext_resource type="Material" uid="uid://sp6b3f71gonj" path="res://Actors/GhostMat3.tres" id="9_ji8h1"]
@@ -22,6 +23,7 @@ levels = Array[PackedScene]([ExtResource("2_2cgox"), ExtResource("2_hggvu"), Ext
 prefab_player = ExtResource("3_twbwk")
 colors = Array[Color]([Color(0.738217, 0.30238, 0.467944, 1), Color(0.233517, 0.512926, 0.635179, 1), Color(0.690947, 0.382886, 0.20787, 1), Color(0.479528, 0.50205, 0.125897, 1)])
 scene_title = ExtResource("4_m6vkl")
+scene_settings = ExtResource("7_o3wbr")
 scene_controls = ExtResource("7_e7nbo")
 scene_end_level = ExtResource("7_dnqbl")
 scene_end_game = ExtResource("8_0bxko")

@@ -7,6 +7,7 @@ const MAX_PLAYER_COUNT = 4
 @export var prefab_player: PackedScene
 @export var colors: Array[Color]
 @export var scene_title: PackedScene
+@export var scene_settings: PackedScene
 @export var scene_controls: PackedScene
 @export var scene_end_level: PackedScene
 @export var scene_end_game: PackedScene
@@ -22,6 +23,7 @@ class Player:
 var players: Array[Player] = []
 var level_index := -1
 var current_scene: Node
+var previous_scene: Node
 var time: float = 0.0
 var level_time: float = 0.0
 
@@ -64,7 +66,8 @@ func set_scene(scene: Variant) -> void:
 	if scene is PackedScene:
 		scene = scene.instantiate()
 	if current_scene != null:
-		#current_scene.queue_free()
+		if current_scene != previous_scene:
+			previous_scene = current_scene
 		get_tree().root.remove_child(current_scene)
 	current_scene = scene
 	if current_scene.get_parent() == null:
@@ -98,6 +101,15 @@ func to_title() -> void:
 
 func to_controls() -> void:
 	set_scene(scene_controls)
+	
+
+func to_settings() -> void:
+	set_scene(scene_settings)
+	
+	
+func back_scene() -> void:
+	if previous_scene != null:
+		set_scene(previous_scene)
 
 
 func set_paused(on: bool) -> void:

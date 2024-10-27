@@ -27,6 +27,15 @@ func _on_4players_pressed() -> void:
 func _start(player_count: int) -> void:
 	GhostGame.set_players(player_count)
 	GhostGame.to_controls()
+	
+func settings() -> void:
+	GhostGame.to_settings()
+	
+func more() -> void:
+	OS.shell_open(\"http://completelycooked.com\")
+	
+func quit() -> void:
+	get_tree().quit()
 "
 
 [node name="TitleScreen" type="Control"]
@@ -39,7 +48,7 @@ grow_vertical = 2
 theme = ExtResource("1_rnfa7")
 script = SubResource("GDScript_a84dh")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -47,33 +56,59 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -470.0
-offset_top = 169.0
+offset_top = 150.0
 offset_right = 470.0
-offset_bottom = 226.0
+offset_bottom = 573.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 20
+theme_override_constants/separation = 30
 script = ExtResource("2_yfoib")
 
-[node name="1Player" type="Button" parent="HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="1Player" type="Button" parent="HBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
 text = "1 PLAYER"
 
-[node name="2Players" type="Button" parent="HBoxContainer"]
+[node name="2Players" type="Button" parent="HBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
 text = "2 PLAYERS"
 
-[node name="3Players" type="Button" parent="HBoxContainer"]
+[node name="3Players" type="Button" parent="HBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
 text = "3 PLAYERS"
 
-[node name="4Players" type="Button" parent="HBoxContainer"]
+[node name="4Players" type="Button" parent="HBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
 text = "4 PLAYERS"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="BtnSettings" type="Button" parent="HBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "SETTINGS"
+
+[node name="BtnMore" type="Button" parent="HBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "MORE"
+
+[node name="BtnQuit" type="Button" parent="HBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "QUIT"
 
 [node name="MenuEnv" parent="." instance=ExtResource("3_gju3t")]
 
@@ -95,7 +130,10 @@ theme_override_font_sizes/font_size = 20
 text = "BY COMPLETELY COOKED GAMES / DALE BLACKWOOD / 2024"
 horizontal_alignment = 1
 
-[connection signal="pressed" from="HBoxContainer/1Player" to="." method="_on_1player_pressed"]
-[connection signal="pressed" from="HBoxContainer/2Players" to="." method="_on_2players_pressed"]
-[connection signal="pressed" from="HBoxContainer/3Players" to="." method="_on_3players_pressed"]
-[connection signal="pressed" from="HBoxContainer/4Players" to="." method="_on_4players_pressed"]
+[connection signal="pressed" from="HBoxContainer/HBoxContainer/1Player" to="." method="_on_1player_pressed"]
+[connection signal="pressed" from="HBoxContainer/HBoxContainer/2Players" to="." method="_on_2players_pressed"]
+[connection signal="pressed" from="HBoxContainer/HBoxContainer/3Players" to="." method="_on_3players_pressed"]
+[connection signal="pressed" from="HBoxContainer/HBoxContainer/4Players" to="." method="_on_4players_pressed"]
+[connection signal="pressed" from="HBoxContainer/HBoxContainer2/BtnSettings" to="." method="settings"]
+[connection signal="pressed" from="HBoxContainer/HBoxContainer2/BtnMore" to="." method="more"]
+[connection signal="pressed" from="HBoxContainer/HBoxContainer2/BtnQuit" to="." method="quit"]

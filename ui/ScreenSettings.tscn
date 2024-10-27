@@ -1,0 +1,101 @@
+[gd_scene load_steps=6 format=3 uid="uid://1m4yx3ovhr8c"]
+
+[ext_resource type="Theme" uid="uid://o0xb575gd85j" path="res://ui/UITheme.tres" id="1_b1mlw"]
+[ext_resource type="Script" path="res://addons/cookpot/CookUIInputGroup.gd" id="2_asopl"]
+[ext_resource type="PackedScene" uid="uid://5qvjpeulkf4" path="res://ui/MenuEnv.tscn" id="3_sr4l4"]
+[ext_resource type="PackedScene" uid="uid://b3roqhut185og" path="res://Models/SpoookyLogo.glb" id="4_5bq4h"]
+
+[sub_resource type="GDScript" id="GDScript_aji2j"]
+script/source = "extends Control
+
+func full_screen() -> void:
+	DisplayServer.window_set_mode(
+		DisplayServer.WindowMode.WINDOW_MODE_FULLSCREEN if not DisplayServer.window_get_mode() == DisplayServer.WindowMode.WINDOW_MODE_FULLSCREEN else DisplayServer.WindowMode.WINDOW_MODE_WINDOWED
+	)
+	
+	
+func clear_data() -> void:
+	var user_data_dir := DirAccess.open(\"user://\")
+	if user_data_dir:
+		user_data_dir.list_dir_begin()
+		var file_name = user_data_dir.get_next()
+		while file_name:
+			if not user_data_dir.current_is_dir():
+				user_data_dir.remove(file_name)  # Delete each file
+			file_name = user_data_dir.get_next()
+		user_data_dir.list_dir_end()
+		print(\"User data cleared.\")
+
+	
+func back() -> void:
+	GhostGame.back_scene()
+"
+
+[node name="SettingsScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_b1mlw")
+script = SubResource("GDScript_aji2j")
+
+[node name="HBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -470.0
+offset_top = 150.575
+offset_right = 470.0
+offset_bottom = 573.575
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+script = ExtResource("2_asopl")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="BtnFull" type="Button" parent="HBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+text = "FULL SCREEN"
+
+[node name="BtnData" type="Button" parent="HBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+text = "CLEAR DATA"
+
+[node name="BtnBack" type="Button" parent="HBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+text = "BACK"
+
+[node name="MenuEnv" parent="." instance=ExtResource("3_sr4l4")]
+
+[node name="SpoookyLogo" parent="." instance=ExtResource("4_5bq4h")]
+transform = Transform3D(2.91672, 0, 3.56353, 0, 4.605, 0, -3.56353, 0, 2.91672, 6.71, 3.109, 5.726)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -58.175
+offset_bottom = -9.17499
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.495585, 0.239217, 0.154518, 1)
+theme_override_font_sizes/font_size = 20
+text = "BY COMPLETELY COOKED GAMES / DALE BLACKWOOD / 2024"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="HBoxContainer/HBoxContainer2/BtnFull" to="." method="full_screen"]
+[connection signal="pressed" from="HBoxContainer/HBoxContainer2/BtnData" to="." method="clear_data"]
+[connection signal="pressed" from="HBoxContainer/HBoxContainer2/BtnBack" to="." method="back"]
